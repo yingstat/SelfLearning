@@ -1,0 +1,18 @@
+"0","a <- IRanges(start = 4, end = 13)"
+"0","b <- IRanges(start = 12, end = 17)"
+"0","a0 <- plotIRanges(c(a, b)) + xlim(3,18) + ylim(0,4) + ggtitle(""a, b"") + theme(plot.title = element_text(hjust = 0.5))"
+"2","Scale for 'x' is already present. Adding another scale for 'x', which will replace the existing scale.
+"
+"0","a1 <- plotIRanges(intersect(a, b)) + xlim(3, 18) + ylim(0,4) + ggtitle(""intersect(a, b)"") + theme(plot.title = element_text(hjust = 0.5))"
+"2","Scale for 'x' is already present. Adding another scale for 'x', which will replace the existing scale.
+"
+"0","a2 <- plotIRanges(setdiff(a, b)) + xlim(3, 18) + ylim(0,4) + ggtitle(""setdiff(a, b)"") + theme(plot.title = element_text(hjust = 0.5))"
+"2","Scale for 'x' is already present. Adding another scale for 'x', which will replace the existing scale.
+"
+"0","a3 <- plotIRanges(setdiff(b, a)) + xlim(3, 18) + ylim(0,4) + ggtitle(""setdiff(b, a)"") + theme(plot.title = element_text(hjust = 0.5))"
+"2","Scale for 'x' is already present. Adding another scale for 'x', which will replace the existing scale.
+"
+"0","a4 <- plotIRanges(union(a, b)) + xlim(3, 18) + ylim(0,4) + ggtitle(""union(a, b)"") + theme(plot.title = element_text(hjust = 0.5))"
+"2","Scale for 'x' is already present. Adding another scale for 'x', which will replace the existing scale.
+"
+"0","grid.arrange(a0, a1,a2,a3,a4, ncol=1 )"

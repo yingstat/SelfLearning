@@ -1,0 +1,6 @@
+"0","library(ggplot2)"
+"0","a <- plotIRanges(rng) + xlim(0, 30) + ylim(0, 4)"
+"2","Scale for 'x' is already present. Adding another scale for 'x', which will replace
+the existing scale.
+"
+"0","a"

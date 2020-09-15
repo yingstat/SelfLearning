@@ -1,0 +1,13 @@
+"0","# A nice feature of working with ranges in R is that we can leverage R’s full array of data
+# analysis capabilities to explore these ranges. For example, after using ranges(hts,
+# qry, sbj) to create a range corresponding to the region shared between each over‐
+# lapping query and subject range, you could use summary(width(ranges(hts, qry,
+# sbj))) to get a summary of how large the overlaps are, or use ggplot2 to plot a histo‐
+# gram of all overlapping widths. This is one of the largest benefits of working with
+# ranges within R—you can interactively explore and understand your results immedi‐
+# ately after generating them.
+summary(width(ranges(hts)))
+"
+"2","Error in (function (classes, fdef, mtable)  : 
+  unable to find an inherited method for function ‘ranges’ for signature ‘""SortedByQueryHits""’
+"

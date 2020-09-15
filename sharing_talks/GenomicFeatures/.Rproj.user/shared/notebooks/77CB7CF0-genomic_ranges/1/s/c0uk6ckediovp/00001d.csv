@@ -1,0 +1,7 @@
+"0","end(rng) <- end(rng) + 3"
+"0","b <- plotIRanges(rng) +  xlim(0, 30)"
+"2","Scale for 'x' is already present. Adding another scale for 'x', which will replace the existing
+scale.
+"
+"0","library(""gridExtra"")"
+"0","grid.arrange(a,b)"

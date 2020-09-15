@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1555073336392.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "9217D8A5",
+    "lastKnownWriteTime" : 1555425628,
+    "last_content_update" : 1555425628511,
+    "path" : "~/Desktop/DrStudy/SelfLectures/yingstat.github.io/sharing_talks/GenomicFeatures/codes/work-with-range-data-20190416.Rpres",
+    "project_path" : "codes/work-with-range-data-20190416.Rpres",
+    "properties" : {
+        "cursorPosition" : "695,25",
+        "scrollLine" : "691"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_presentation"
+}

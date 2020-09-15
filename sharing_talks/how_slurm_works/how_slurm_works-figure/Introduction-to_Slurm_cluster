@@ -1,0 +1,92 @@
+here is a introduction to our queueing system
+
+
+Login:
+
+To access the cluster, log in via ssh into any cluster-node you like.
+
+In case you do not have a valid login, Anja can provide one.
+
+The cluster-nodes are:
+
+pool: pool PCs
+
+gpus: aliens, New aliens, poolgpu
+
+vm: virtual machines
+
+
+Commands:
+
+Once logged in, there are several commands you need to use the cluster:
+
+squeue - view information about jobs located in the Slurm scheduling queue.
+
+$ squeue
+
+sinfo - view information about Slurm nodes and partitions.
+
+$ sinfo
+
+sbatch - Submit a batch script to Slurm.
+
+$ sbatch <script>
+
+scancel - Stop the job and remove it from the queue.
+
+$ scancel <job id>
+
+scontrol - Administrative and more indepth information functionalities
+
+$ scontrol [OPTIONS...] [COMMAND...]
+
+Useful:
+
+$ scontrol show nodes # full information on all the nodes
+
+$ scontrol show node <Node Name> # full information on  node
+
+Unless specified otherwise, slurm will start the job in the directory that you are currently in. Since we have a global file system, all cluster-nodes read from and write to the same location (as long as you stay in you home directory).
+
+
+Here is an example script:
+
++++++++++++++++++++++++++++++++++++
+
+#!/bin/bash
+# Slurm script
+#
+#SBATCH --job-name=example_job_name
+#SBATCH --partition=vm
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=4
+#SBATCH --output=example_job-%j.stdout
+#SBATCH --error=example_job-%j.stderr
+
+####################################
+# script code to be added....
+
+
+++++++++++++++++++++++++++++++++++
+
+
+There are many more options than listed here that can be specified with the "#SBATCH prefix".
+
+Here is a short description of the options used above:
+--job_name Name of the job.
+
+--partition
+Name of the partition in which the job is running.
+Available partitions: pool, vm, gpus, poolgpu
+
+--nodes=<minnodes[-maxnodes]>
+Request that a minimum of minnodes nodes be allocated to this job. A maximum node count may also be specified with maxnodes. If only one number is specified, this is used as both the minimum and maximum node count.
+
+--cpus-per-task=<ncpus>
+Advise the Slurm controller that ensuing job steps will require ncpus number of processors per task. Without this option, the controller will just try to allocate one processor per task.
+
+--output=<filename pattern>
+Instruct Slurm to connect the batch script's standard output directly to the file name specified in the "filename pattern". By default both standard output and standard error are directed to the same file. For job arrays, the default file name is "slurm-%A_%a.out", "%A" is replaced by the job ID and "%a" with the array index. For other jobs, the default file name is "slurm-%j.out", where the "%j" is replaced by the job ID. See the --input option for filename specification options.
+
+--error=<filename pattern>
+Instruct Slurm to connect the batch script's standard error directly to the file name specified in the "filename pattern". By default both standard output and standard error are directed to the same file. For job arrays, the default file name is "slurm-%A_%a.out", "%A" is replaced by the job ID and "%a" with the array index. For other jobs, the default file name is "slurm-%j.out", where the "%j" is replaced by the job ID. See the --input option for filename specification options. 

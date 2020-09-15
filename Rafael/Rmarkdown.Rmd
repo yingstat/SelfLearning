@@ -1,0 +1,24 @@
+---
+title: "Rmarkdown"
+author: "Yingying Cao"
+date: "9/15/2020"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Key points
+
+- The knitr package is used to compile R markdown documents.
+- The first time you click the "knit" button on the editor pane a pop-up window will prompt you to install packages, but after that is completed, the button will automatically knit your document.
+- github_document gives a .md file, which will give the best presentation on GitHub
+
+### Code
+
+- output: html_document 
+- output: pdf_document 
+- output: word_document
+- output: github_document
+

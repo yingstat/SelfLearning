@@ -1,0 +1,18 @@
+"0","a <- IRanges(start = 1:9, end = 5:13)"
+"0","b <- IRanges(start = 3:11, end = 9:17)"
+"0","a0 <- plotIRanges(c(a, b)) + xlim(3,18) + ylim(0,18) + ggtitle(""a, b"") + theme(plot.title = element_text(hjust = 0.5))"
+"2","Scale for 'x' is already present. Adding another scale for 'x', which will replace the existing scale.
+"
+"0","a1 <- plotIRanges(pintersect(a, b)) + xlim(3, 18) + ylim(0,18) + ggtitle(""pintersect(a, b)"") + theme(plot.title = element_text(hjust = 0.5))"
+"2","Scale for 'x' is already present. Adding another scale for 'x', which will replace the existing scale.
+"
+"0","a2 <- plotIRanges(psetdiff(a, b)) + xlim(3, 18) + ylim(0,18) + ggtitle(""psetdiff(a, b)"") + theme(plot.title = element_text(hjust = 0.5))"
+"2","Scale for 'x' is already present. Adding another scale for 'x', which will replace the existing scale.
+"
+"0","a3 <- plotIRanges(psetdiff(b, a)) + xlim(3, 18) + ylim(0,18) + ggtitle(""psetdiff(b, a)"") + theme(plot.title = element_text(hjust = 0.5))"
+"2","Scale for 'x' is already present. Adding another scale for 'x', which will replace the existing scale.
+"
+"0","a4 <- plotIRanges(punion(a, b)) + xlim(3, 18) + ylim(0,18) + ggtitle(""punion(a, b)"") + theme(plot.title = element_text(hjust = 0.5))"
+"2","Scale for 'x' is already present. Adding another scale for 'x', which will replace the existing scale.
+"
+"0","grid.arrange(a0, a1,a2,a3,a4, ncol=1 )"

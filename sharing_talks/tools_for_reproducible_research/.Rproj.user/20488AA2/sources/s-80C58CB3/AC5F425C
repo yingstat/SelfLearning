@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1559921745249.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "AC5F425C",
+    "lastKnownWriteTime" : 1559921745,
+    "last_content_update" : 1559921759752,
+    "path" : "~/Desktop/DrStudy/SelfLectures/yingstat.github.io/sharing_talks/tools_for_reproducible_research/tools_for_reproducible_research.Rpres",
+    "project_path" : "tools_for_reproducible_research.Rpres",
+    "properties" : {
+        "cursorPosition" : "0,23",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_presentation"
+}

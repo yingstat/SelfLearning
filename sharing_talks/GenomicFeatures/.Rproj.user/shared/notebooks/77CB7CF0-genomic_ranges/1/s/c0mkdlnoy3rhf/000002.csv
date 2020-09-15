@@ -1,0 +1,3 @@
+"0","# if (!requireNamespace(""BiocManager"", quietly = TRUE))"
+"0","#     install.packages(""BiocManager"")"
+"0","# BiocManager::install(""GenomicRanges"", version = ""3.8"")"

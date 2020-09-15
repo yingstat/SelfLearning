@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1555059329301.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "6BFA981B",
+    "lastKnownWriteTime" : 1555341413,
+    "last_content_update" : 1555341413419,
+    "path" : "~/Desktop/DrStudy/SelfLectures/yingstat.github.io/sharing_talks/GenomicFeatures/codes/genomic_ranges.Rmd",
+    "project_path" : "codes/genomic_ranges.Rmd",
+    "properties" : {
+        "chunk_output_type" : "inline",
+        "cursorPosition" : "26,0",
+        "docOutlineVisible" : "0",
+        "scrollLine" : "23",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

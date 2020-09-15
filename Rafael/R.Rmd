@@ -1,0 +1,68 @@
+---
+title: "R"
+author: "Yingying Cao"
+date: "9/15/2020"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Install packages
+
+
+- We will be using tidyverse and dslabs packages for this course, which do not come preinstalled in base R.
+- Install packages from R console: install.packages("pkg_name")
+- Install packages from Rstudio interface: Tools > install packages (allow autocomplete)
+- Once installed, we can use library("pkg_name") to load a package each time we want to use it
+
+- Check the packages you have installed
+- Good practice: make a script to install all the packages you need for a fresh R
+
+#### Code
+
+- install.packages("dslabs")  # to install a single package
+- install.packages(c("tidyverse", "dslabs")） # to install two packages at the same time
+- installed.packages() # to see the list of all installed packages
+
+### Rstudio
+
+- RStudio has many useful features as an R editor, including the ability to test code easily as we write scripts and several autocomplete features.
+- Keyboard shortcuts:
+  - Save a script: Ctrl+S on Windows and Command+S on Mac
+  - Run an entire script:  Ctrl+Shift+Enter on Windows Command+Shift+Return on Mac, or click "Source" on the editor pane
+  - Run a single line of script: Ctrl+Enter on Windows and Command+Return on Mac while the cursor is pointing to that line, or select the chunk and click "run"
+  - Open a new script: Ctrl+Shift+N on Windows and Command+Shift+N on Mac
+
+### R project
+
+- RStudio provides a way to keep all the components of a data analysis project organized into one folder and to keep track of information about this project.
+- To start a project, click on File > New Project > New repository > New project > decide the location of files and give a name to the project, e.g. "my-first-project". This will then generate a Rproj file called my-first-project.Rproj in the folder associated with the project, from which you can double click to start where you last left off.
+- The project name will appear in the upper left corner or the upper right corner, depending on your operating system. When you start an RStudio session with no project, it will display "Project: (None)".
+
+### Git
+
+- Git is a version control system, tracking changes and coordinating the editing of code.
+- GitHub is a hosting system for code, which can help with your career profile.
+- Git is most effectively used with Unix, but it can also interface with RStudio.
+
+### RStudio, Git, and GitHub
+Key points
+
+    In terminal: configure git 
+
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+
+- In RStudio, create project > Version control > Git
+- Git pane: status symbols and color
+- Git actions:
+
+  - pull: pull changes from remote repo (if you are in collaboration with others)
+  - add: stage files for commit; click on stage box under git pane
+  - commit: commit to the local repo; click on "commit" button under git pane; add a commit message
+  - push: push to the remote repo on Github
+
+  - .gitignore file: details check https://git-scm.com/docs/gitignore External link
+

@@ -1,0 +1,101 @@
+source $VIMRUNTIME/vimrc_example.vim
+source $VIMRUNTIME/mswin.vim
+behave mswin
+
+set diffexpr=MyDiff()
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      if empty(&shellxquote)
+        let l:shxq_sav = ''
+        set shellxquote&
+      endif
+      let cmd = '"' . $VIMRUNTIME . '\diff"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+  if exists('l:shxq_sav')
+    let &shellxquote=l:shxq_sav
+  endif
+endfunction
+
+" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
+filetype plugin on
+
+" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
+" can be called correctly.
+set shellslash
+
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
+
+" OPTIONAL: This enables automatic indentation as you type.
+filetype indent on
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+
+filetype plugin on
+filetype indent on
+au BufEnter *.tex set autowrite
+let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_MultipleCompileFormats = 'pdf'
+let g:Tex_CompileRule_pdf = 'pdflatex -interaction=nonstopmode $*'
+let g:Tex_GotoError = 0
+let g:Tex_ViewRule_pdf = 'SumatraPDF'
+
+" Das sind nun meine privaten aenderungen
+set nu
+set nolist wrap linebreak breakat&vim
+e! ++enc=utf8
+set spellfile=C:\Users\keks\Dropbox\Reading\vim_spelling\utf-8.add
+" let g:Tex_UsePython=0
+
+set tabstop=4       " number of visual spaces per TAB
+set softtabstop=4   " number of spaces in tab when editing
+set expandtab       " tabs are spaces
+set cursorline      " highlight current line
+
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
+
+" jk is escape also switch to normal mode
+inoremap jk <esc>
+
+" saves the file and runs python on it
+nnoremap <silent> <F7> :w <bar> !python %<CR>
+set foldmethod=indent
+set foldnestmax=2
+
+" Submode fuer korrekturen
+noremap <Right> ]s
+noremap <Left> [s
+noremap <Up> z=
+noremap <Down> zg
+set spell
+
+" Staret gvim maximiert
+autocmd GUIEnter * simalt ~x
+
+" Speichert die vim logs und backups in einem ordner und nicht im dem aktuellen
+set backupdir=C:\Users\keks\Documents\VimBackups\vimtmp,.
+set directory=C:\Users\keks\Documents\VimBackups\vimtmp,.
+set undodir=C:\Users\keks\Documents\VimBackups\vimtmp,.

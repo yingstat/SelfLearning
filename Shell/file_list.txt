@@ -1,0 +1,14 @@
+Basics.aux
+Basics.log
+Basics.nav
+Basics.out
+Basics.pdf
+Basics.snm
+Basics.synctex.gz
+Basics.tex
+Basics.toc
+file_list.txt
+numbers.txt
+test
+week1.sh
+week2.sh

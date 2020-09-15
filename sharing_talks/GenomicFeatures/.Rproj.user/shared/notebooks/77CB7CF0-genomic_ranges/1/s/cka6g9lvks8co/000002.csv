@@ -1,0 +1,8 @@
+"0","# If instead we wanted the mean coverage within this range, we could simply pass the
+# result to mean() :
+mean(rngs_cov[rngs['A']])
+"
+"1","[1]"
+"1"," 1.714286"
+"1","
+"

@@ -1,0 +1,11 @@
+"0","qry <- IRanges(start=c(1, 26, 19, 11, 21, 7), end=c(16, 30, 19, 15, 24, 8), names=letters[1:6])"
+"0","sbj <- IRanges(start=c(1, 19, 10), end=c(5, 29, 16), names=letters[24:26])"
+"0","m1 <- plotIRanges(qry,color = ""white"") + xlim(0, 32) + ylim(0,4) + ggtitle(""query"") + theme(plot.title = element_text(hjust = 0.5))"
+"2","Scale for 'x' is already present. Adding another scale for 'x', which will replace
+the existing scale.
+"
+"0","m2 <- plotIRanges(sbj) + xlim(0, 32) + ylim(0,2) + ggtitle(""subject"") + theme(plot.title = element_text(hjust = 0.5))"
+"2","Scale for 'x' is already present. Adding another scale for 'x', which will replace
+the existing scale.
+"
+"0","grid.arrange(m1,m2, ncol=1 )"

@@ -1,0 +1,9 @@
+"0","chr1_exons <- exonsBy(txdb, ""tx"")
+chr1_exons <- exonsBy(txdb, ""tx"")
+all(unlist(seqnames(chr1_exons)) == ""chr1"")
+"
+"2","failed to set names on the unlisted CompressedRleList object"
+"1","[1]"
+"1"," TRUE"
+"1","
+"

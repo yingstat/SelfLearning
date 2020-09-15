@@ -1,0 +1,233 @@
+---
+title: "Basic Statistics"
+author: "yingying"
+date: "January 10, 2019"
+output: beamer_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## One-Way ANOVA Test in R
+The one-way analysis of variance (ANOVA), also known as one-factor ANOVA, is an extension of independent two-samples t-test for comparing means in a situation where there are more than two groups. In one-way ANOVA, the data is organized into several groups base on one single grouping variable (also called factor variable). This tutorial describes the basic principle of the one-way ANOVA test and provides practical anova test examples in R software.
+
+ANOVA test hypotheses:
+
+    Null hypothesis: the means of the different groups are the same
+    Alternative hypothesis: At least one sample mean is not equal to the others.
+Assumptions of ANOVA test
+Here we describe the requirement for ANOVA test. ANOVA test can be applied only when:
+
+    The observations are obtained independently and randomly from the population defined by the factor levels
+    The data of each factor level are normally distributed.
+    These normal populations have a common variance. (Levene’s test can be used to check this.)
+
+How one-way ANOVA test works?
+
+Assume that we have 3 groups (A, B, C) to compare:
+
+    Compute the common variance, which is called variance within samples (S2within) or residual variance.
+Compute the variance between sample means as follow:
+
+    Compute the mean of each group
+    Compute the variance between sample means (S2between)
+
+Produce F-statistic as the ratio of S2between/S2within.
+
+Note that, a lower ratio (ratio < 1) indicates that there are no significant difference between the means of the samples being compared. However, a higher ratio implies that the variation among group means are significant. 
+
+```{r}
+# use the built-in R data
+my_data <- PlantGrowth
+# Show a random sample
+set.seed(1234)
+dplyr::sample_n(my_data, 10)
+```
+
+```{r}
+# use the built-in R data set
+my_data <- PlantGrowth
+# show the group levels
+levels(my_data$group)
+# If the levels are not automatically in the correct order, re-order them as follow
+my_data$group <- ordered(my_data$group,
+                         levels = c("ctrl", "trt1", "trt2"))
+```
+
+
+```{r}
+# compute summary statistics by groups
+library(dplyr)
+group_by(my_data, group) %>%
+  summarise(
+    count = n(),
+    mean = mean(weight, na.rm = TRUE),
+    sd = sd(weight, na.rm = TRUE),
+    median = median(weight, na.rm = TRUE),
+    IQR = IQR(weight, na.rm = TRUE)
+  )
+```
+
+
+```{r,fig.height=4, fig.width=5}
+# Visualize the data using box plots
+# Install
+# if(!require(devtools)) install.packages("devtools")
+# devtools::install_github("kassambara/ggpubr")
+library("ggpubr")
+ggboxplot(my_data, x = "group", y = "weight", 
+          color = "group", palette = c("#00AFBB", "#E7B800", "#FC4E07"),
+          order = c("ctrl", "trt1", "trt2"),
+          ylab = "Weight", xlab = "Treatment")
+
+```
+
+```{r,fig.height=4, fig.width=5}
+# Mean plots
+# ++++++++++++++++++++
+# Plot weight by group
+# Add error bars: mean_se
+# (other values include: mean_sd, mean_ci, median_iqr, ....)
+library("ggpubr")
+ggline(my_data, x = "group", y = "weight", 
+       add = c("mean_se", "jitter"), 
+       order = c("ctrl", "trt1", "trt2"),
+       ylab = "Weight", xlab = "Treatment")
+```
+
+
+If you still want to use R base graphs, type the following scripts:
+```{r}
+# Box plot
+boxplot(weight ~ group, data = my_data,
+        xlab = "Treatment", ylab = "Weight",
+        frame = FALSE, col = c("#00AFBB", "#E7B800", "#FC4E07"))
+# plotmeans
+library("gplots")
+plotmeans(weight ~ group, data = my_data, frame = FALSE,
+          xlab = "Treatment", ylab = "Weight",
+          main="Mean Plot with 95% CI") 
+
+```
+
+## Compute one-way ANOVA test
+
+```{r}
+# Compute the analysis of variance
+res.aov <- aov(weight ~ group, data = my_data)
+# Summary of the analysis
+summary(res.aov)
+```
+
+## Multiple pairwise-comparison between the means of groups
+As the ANOVA test is significant, we can compute Tukey HSD (Tukey Honest Significant Differences, R function: TukeyHSD()) for performing multiple pairwise-comparison between the means of groups.
+The function TukeyHD() takes the fitted ANOVA as an argument.
+
+```{r}
+TukeyHSD(res.aov)
+```
+
+## Multiple comparisons using multcomp package
+It’s possible to use the function glht() [in multcomp package] to perform multiple comparison procedures for an ANOVA. glht stands for general linear hypothesis tests. The simplified format is as follow:
+glht(model, lincft)
+
+    model: a fitted model, for example an object returned by aov().
+    lincft(): a specification of the linear hypotheses to be tested. Multiple comparisons in ANOVA models are specified by objects returned from the function mcp().
+
+Use glht() to perform multiple pairwise-comparisons for a one-way ANOVA:
+```{r}
+library(multcomp)
+summary(glht(res.aov, linfct = mcp(group = "Tukey")))
+```
+
+## Pairewise t-test
+The function pairewise.t.test() can be also used to calculate pairwise comparisons between group levels with corrections for multiple testing.
+
+```{r}
+pairwise.t.test(my_data$weight, my_data$group,
+                 p.adjust.method = "BH")
+```
+
+## Check ANOVA assumptions: test validity?
+
+The ANOVA test assumes that, the data are normally distributed and the variance across groups are homogeneous. We can check that with some diagnostic plots.
+
+## Check the homogeneity of variance assumption
+
+The residuals versus fits plot can be used to check the homogeneity of variances.
+
+In the plot below, there is no evident relationships between residuals and fitted values (the mean of each groups), which is good. So, we can assume the homogeneity of variances.
+```{r, fig.height=4, fig.width=5}
+# 1. Homogeneity of variances
+plot(res.aov, 1)
+```
+
+It’s also possible to use Bartlett’s test or Levene’s test to check the homogeneity of variances.
+
+We recommend Levene’s test, which is less sensitive to departures from normal distribution. The function leveneTest() [in car package] will be used:
+```{r}
+library(car)
+leveneTest(weight ~ group, data = my_data)
+```
+
+
+
+## Relaxing the homogeneity of variance assumption
+
+The classical one-way ANOVA test requires an assumption of equal variances for all groups. In our example, the homogeneity of variance assumption turned out to be fine: the Levene test is not significant.
+
+How do we save our ANOVA test, in a situation where the homogeneity of variance assumption is violated?
+
+An alternative procedure (i.e.: Welch one-way test), that does not require that assumption have been implemented in the function oneway.test().
+
+ANOVA test with no assumption of equal variances
+
+
+```{r}
+oneway.test(weight ~ group, data = my_data)
+```
+
+Pairwise t-tests with no assumption of equal variances
+```{r}
+
+pairwise.t.test(my_data$weight, my_data$group,
+                 p.adjust.method = "BH", pool.sd = FALSE)
+```
+
+## Check the normality assumption
+Normality plot of residuals. In the plot below, the quantiles of the residuals are plotted against the quantiles of the normal distribution. A 45-degree reference line is also plotted.
+
+The normal probability plot of residuals is used to check the assumption that the residuals are normally distributed. It should approximately follow a straight line.
+As all the points fall approximately along this reference line, we can assume normality.
+```{r, fig.height=4, fig.width=5}
+# 2. Normality
+plot(res.aov, 2)
+```
+
+The conclusion above, is supported by the Shapiro-Wilk test on the ANOVA residuals (W = 0.96, p = 0.6) which finds no indication that normality is violated.
+```{r}
+# Extract the residuals
+aov_residuals <- residuals(object = res.aov )
+# Run Shapiro-Wilk test
+shapiro.test(x = aov_residuals )
+```
+
+
+
+## Kruskal-Wallis Test
+Kruskal-Wallis test by rank is a non-parametric alternative to one-way ANOVA test, which extends the two-samples Wilcoxon test in the situation where there are more than two groups. It’s recommended when the assumptions of one-way ANOVA test are not met. This tutorial describes how to compute Kruskal-Wallis test in R software. 
+
+## Compute Kruskal-Wallis test
+```{r}
+# compute Kruskal-Wallis test
+kruskal.test(weight ~ group, data = my_data)
+```
+## Multiple pairwise-comparison between groups
+From the output of the Kruskal-Wallis test, we know that there is a significant difference between groups, but we don’t know which pairs of groups are different.
+It’s possible to use the function pairwise.wilcox.test() to calculate pairwise comparisons between group levels with corrections for multiple testing.
+```{r}
+pairwise.wilcox.test(PlantGrowth$weight, PlantGrowth$group,
+                 p.adjust.method = "BH")
+```
+

@@ -1,0 +1,959 @@
+---
+title: "GenomicRanges"
+output: html_notebook
+---
+
+The GenomicRanges package defines general purpose containers for storing and manipulating genomic intervals and variables defined along a genome. More specialized containers for representing and manipulating short alignments against a reference genome, or a matrix-like summarization of an experiment, are defined in the GenomicAlignments and SummarizedExperiment packages, respectively. Both packages build on top of the GenomicRanges infrastructure.
+
+### install the packges
+```{r}
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#     install.packages("BiocManager")
+# BiocManager::install("GenomicRanges", version = "3.8")
+```
+### Storing Generic Ranges with IRanges
+IRanges(start=NULL, end=NULL, width=NULL, names=NULL)
+```{r}
+#The IRanges package is a dependency of the GenomicRanges package we installed earlier
+library(IRanges) 
+#The ranges we create with the IRanges package are called IRanges objects
+rng <- IRanges(start=c(4, 7, 2, 20), end=c(13, 7, 5, 23))
+names(rng) <-LETTERS[1:4]
+rng
+```
+
+
+```{r}
+library(ggplot2)
+a <- plotIRanges(rng) + xlim(0, 30) + ylim(0, 4)
+a
+```
+
+
+
+```{r}
+start(rng)
+end(rng)
+width(rng)
+range(rng) 
+rng[1:3]
+rng["C"]
+rng[start(rng) > 5]
+m <- IRanges(start = 3, width = 5)
+n <- IRanges(start = 6, width = 8)
+c(m, n)
+```
+
+```{r}
+end(rng) <- end(rng) + 3
+b <- plotIRanges(rng) +  xlim(0, 30)
+library("gridExtra")
+grid.arrange(a,b)
+```
+### Basic Range Operations: Arithmetic, Transformations, ans Set Operations
+```{r}
+# With IRanges objects, addition (subtraction) will grow (shrink) a range symmetrically by the value added (subtracted) to it
+rng + 4
+rng - 4
+```
+
+
+```{r}
+#restrict() cuts a set of ranges such that they fall inside of a certain bound
+y <- IRanges(start = c(4, 6, 10, 12), width = 13)
+y
+y.r <- restrict(y, start = 5, end = 10)
+y.p <- plotIRanges(y) +  xlim(3, 25)
+y.r.p <- plotIRanges(y.r) +  xlim(3, 25)
+grid.arrange(y.p, y.r.p)
+```
+
+
+```{r}
+# flank() returns the regions that flank (are on the side of) each range in an IRanges object.
+# flank() is useful in creating ranges upstream and downstream of protein coding genes that could contain promoter sequences.
+# For example, if our ranges demarcate the transition start site (TSS)
+# and transcription termination site (TTS) of a set of genes, flank() can be used to create a set of ranges upstream of the TSS that contain promoters.
+
+x <- IRanges(start=c(40, 80), end=c(67, 114))
+x
+# By default, flank() creates ranges width positions upstream of the ranges passed to it. Flanking ranges downstream can be created by setting start=FALSE:
+
+flank(x, width = 7)
+flank(x, width = 7, start = FALSE)
+
+f <- plotIRanges(x) + xlim(20, 125) + ggtitle("original") + theme(plot.title = element_text(hjust = 0.5)) 
+f.s <- plotIRanges(flank(x, width = 7)) + xlim(20, 125) + ggtitle("upstream") + theme(plot.title = element_text(hjust = 0.5)) 
+f.e <- plotIRanges(flank(x, width = 7, start = FALSE)) + xlim(20, 125) + ggtitle("downstream") + theme(plot.title = element_text(hjust = 0.5)) 
+grid.arrange(f, f.s, f.e)
+```
+
+
+
+```{r}
+# the reduce() operation takes a set of possibly overlapping ranges and reduces them to a set of nonoverlapping ranges that cover the same positions
+
+# gaps() returns the gaps (uncovered portions) between ranges
+# gaps() has numerous applications in genomics: creating intron ranges between exons ranges, finding gaps in coverage. defining intragenic regions between genic regions and more 
+
+# by default, gaps() only returns the gaps between ranges, and does not include those from the beginning of the sequence to the start position of the first range, and the end of the last range to the end of the sequence.
+# If you’d like gaps() to include these gaps, specify the start and end positions in gaps (e.g., gaps(alns, start=1, end=60)).
+
+
+set.seed(0)
+alns <- IRanges(start=sample(seq_len(50), 20), width=5)
+head(alns, 5)
+reduce(alns)
+
+b.r <- plotIRanges(alns) + xlim(0,60) + ylim(0,8) + ggtitle("alns") + theme(plot.title = element_text(hjust = 0.5))
+a.r <- plotIRanges(reduce(alns))+ xlim(0,60) + ylim(0,8) + ggtitle("reduce(alns)") + theme(plot.title = element_text(hjust = 0.5))
+a.g <- plotIRanges(gaps(alns))+ xlim(0,60) + ylim(0,8) + ggtitle("gaps(alns)") + theme(plot.title = element_text(hjust = 0.5))
+grid.arrange(b.r, a.r, a.g)
+
+
+```
+
+```{r, fig.width=8,fig.height=8 }
+a <- IRanges(start = 4, end = 13)
+b <- IRanges(start = 12, end = 17)
+
+a0 <- plotIRanges(c(a, b)) + xlim(3,18) + ylim(0,4) + ggtitle("a, b") + theme(plot.title = element_text(hjust = 0.5))
+a1 <- plotIRanges(intersect(a, b)) + xlim(3, 18) + ylim(0,4) + ggtitle("intersect(a, b)") + theme(plot.title = element_text(hjust = 0.5))
+a2 <- plotIRanges(setdiff(a, b)) + xlim(3, 18) + ylim(0,4) + ggtitle("setdiff(a, b)") + theme(plot.title = element_text(hjust = 0.5))
+a3 <- plotIRanges(setdiff(b, a)) + xlim(3, 18) + ylim(0,4) + ggtitle("setdiff(b, a)") + theme(plot.title = element_text(hjust = 0.5))
+a4 <- plotIRanges(union(a, b)) + xlim(3, 18) + ylim(0,4) + ggtitle("union(a, b)") + theme(plot.title = element_text(hjust = 0.5))
+grid.arrange(a0, a1,a2,a3,a4, ncol=1 )
+```
+
+
+```{r, fig.width=8,fig.height=8 }
+#Sets operations operate on IRanges with multiple ranges (rows) as if they’ve been collapsed with reduce() first (because mathematically, overlapping ranges make up the same set). IRanges also has a group of set operation functions that act pairwise, taking two equal-length IRanges objects and working range-wise: psetdiff() , pintersect() , punion() , and pgap() .
+a <- IRanges(start = 1:9, end = 5:13)
+b <- IRanges(start = 3:11, end = 9:17)
+a0 <- plotIRanges(c(a, b)) + xlim(3,18) + ylim(0,18) + ggtitle("a, b") + theme(plot.title = element_text(hjust = 0.5))
+a1 <- plotIRanges(pintersect(a, b)) + xlim(3, 18) + ylim(0,18) + ggtitle("pintersect(a, b)") + theme(plot.title = element_text(hjust = 0.5))
+a2 <- plotIRanges(psetdiff(a, b)) + xlim(3, 18) + ylim(0,18) + ggtitle("psetdiff(a, b)") + theme(plot.title = element_text(hjust = 0.5))
+a3 <- plotIRanges(psetdiff(b, a)) + xlim(3, 18) + ylim(0,18) + ggtitle("psetdiff(b, a)") + theme(plot.title = element_text(hjust = 0.5))
+a4 <- plotIRanges(punion(a, b)) + xlim(3, 18) + ylim(0,18) + ggtitle("punion(a, b)") + theme(plot.title = element_text(hjust = 0.5))
+grid.arrange(a0, a1,a2,a3,a4, ncol=1 )
+```
+
+## Finding Overlapping Ranges
+Finding overlaps is an essential part of many genomics analysis tasks. Computing
+overlaps is how we connect experimental data in the form of aligned reads, inferred
+variants, or peaks of alignment coverage to annotated biological features of the
+genome like gene regions, methylation, chromatin status, evolutionarily conserved
+regions, and so on. For tasks like RNA-seq, overlaps are how we quantify our cellular
+activity like expression and identify different transcript isoforms. Computing over‐
+laps also exemplifies why it’s important to use existing libraries: there are advanced
+data structures and algorithms that can make the computationally intensive task of
+comparing numerous (potentially billions) ranges to find overlaps efficient. There are
+also numerous very important technical details in computing overlaps that can have a
+drastic impact on the end result, so it’s vital to understand the different types of over‐
+laps and consider which type is most appropriate for a specific task.
+```{r}
+qry <- IRanges(start=c(1, 26, 19, 11, 21, 7), end=c(16, 30, 19, 15, 24, 8), names=letters[1:6])
+sbj <- IRanges(start=c(1, 19, 10), end=c(5, 29, 16), names=letters[24:26])
+
+m1 <- plotIRanges(qry,color = "white") + xlim(0, 32) + ylim(0,4) + ggtitle("query") + theme(plot.title = element_text(hjust = 0.5))
+m2 <- plotIRanges(sbj) + xlim(0, 32) + ylim(0,2) + ggtitle("subject") + theme(plot.title = element_text(hjust = 0.5))
+grid.arrange(m1,m2, ncol=1 )
+```
+
+The Hits object from findOverlaps() has two columns on indices: one for the query
+ranges and one for the subject ranges. Each row contains the index of a query range
+that overlaps a subject range, and the index of the subject range it overlaps. We can
+access these indices by using the accessor functions queryHits() and subjectHits() .
+
+```{r}
+hts <- findOverlaps(qry, sbj)
+hts
+names(qry)[queryHits(hts)]
+names(sbj)[subjectHits(hts)]
+#findOverlaps() is computing overlaps: a range is considered to be overlapping if any part of it overlaps a subject range. This type of overlap behavior is set with the type argument to findOverlaps() , which is "any" by default.
+
+#Depending on our biological task, type="any" may not be the best form of overlap.For example, we could limit our overlap results to only include query ranges that fall entirely within subject ranges with type=within
+
+#While type="any" and type="within" are the most common options in day-to-day work, findOverlaps() supports other overlap types. See help(findOverlaps) to see the others (and much more information about findOverlaps() and related functions).
+
+#Another findOverlaps() parameter that we need to consider when computing overlaps is select , which determines how findOverlaps() handles cases where a single query range overlaps more than one subject range. For example, the range named a in qry overlaps both x and y . By default, select="all" , meaning that all overlapping ranges are returned. In addition, select allows the options "first" , "last" , and "arbitrary", which return the first, last, and an arbitrary subject hit, respectively. Because the options "first" , "last" , and "arbitrary" all lead findOverlaps() to return only one overlapping subject range per query (or NA if no overlap is found), results are returned in an integer vector where each element corresponds to a query range in qry
+
+findOverlaps(qry, sbj, select = "first")
+findOverlaps(qry, sbj, select = "last")
+findOverlaps(qry, sbj, select = "arbitrary")
+
+```
+What an overlap “is” may seem obvious at first, but the specifics
+can matter a lot in real-life genomic applications. For example,
+allowing for a query range to overlap any part of a subject range
+makes sense when we’re looking for SNPs in exons. However, clas‐
+sifying a 1kb genomic window as coding because it overlaps a sin‐
+gle base of a gene may make less sense (though depends on the
+application). It’s important to always relate your quantification
+methods to the underlying biology of what you’re trying to under‐
+stand.
+
+The intricacies of overlap operations are especially important when
+we use overlaps to quantify something, such as expression in an
+RNA-seq study. For example, if two transcript regions overlap each
+other, a single alignment could overlap both transcripts and be
+counted twice—not good. Likewise, if we count how many align‐
+ments overlap exons, it’s not clear how we should aggregate over‐
+laps to obtain transcript or gene-level quantification. Again,
+different approaches can lead to sizable differences in statistical
+results. The take-home lessons are as follows:
+• Mind what your code is considering an overlap.
+• For quantification tasks, simple overlap counting is best
+thought of as an approximation (and more sophisticated meth‐
+ods do exist).
+See Trapnell, et al., 2013 for a really nice introduction of these
+issues in RNA-seq quantification.
+
+
+
+
+
+
+Counting many overlaps can be a computationally expensive operation, especially
+when working with many query ranges. This is because the naïve solution is to take a
+query range, check to see if it overlaps any of the subject ranges, and then repeat
+across all other query ranges. If you had Q query ranges and S subject ranges, this
+would entail Q × S comparisons. However, there’s a trick we can exploit: ranges are
+naturally ordered along a sequence. If our query range has an end position of 230,193,
+there’s no need to check if it overlaps subject ranges with start positions larger than
+230,193—it won’t overlap. By using a clever data structure that exploits this property,
+we can avoid having to check if each of our Q query ranges overlap our S subject
+ranges. The clever data structure behind this is the interval tree. It takes time to build
+an interval tree from a set of subject ranges, so interval trees are most appropriate for
+tasks that involve finding overlaps of many query ranges against a fixed set of subject
+ranges. In these cases, we can build the subject interval tree once and then we can use
+it over and over again when searching for overlaps with each of the query ranges.
+
+Implementing interval trees is an arduous task, but luckily we don’t have to utilize
+their massive computational benefits. IRanges has an IntervalTree class that uses
+interval trees under the hood. Creating an IntervalTree object from an IRanges
+object is simple: 
+sbj_it <- IntervalTree(sbj)
+Using this sbj_it object illustrates we can use findOverlaps() with IntervalTree
+objects just as we would a regular IRanges object—the interfaces are identical:
+findOverlaps(qry, sbj_it)
+
+
+```{r}
+#Hits objects can be coerced to matrix using as.matrix() .
+as.matrix(hts)
+#countQueryHits() returns a vector of how many subject ranges each query IRanges object overlaps. Using the function setNames() , I’ve given the resulting vector the same names as our original ranges on the next line so the result is clearer.
+countQueryHits(hts)
+#The function countSubjectHits() is like countQueryHits() , but returns how many query ranges overlap the subject ranges. As before, I’ve used setNames() to label these counts with the subject ranges’ names so these results are clearly labelled.
+setNames(countQueryHits(hts), names(qry))
+countSubjectHits(hts)
+setNames(countSubjectHits(hts), names(sbj))
+
+#ranges(hts, qry, sbj)
+
+#Here, we create a set of ranges for overlapping regions by calling the ranges()
+#function using the Hits object as the first argument, and the same query and
+#subject ranges we passed to findOverlaps() as the second and third arguments.
+#These intersecting ranges are depicted in Figure 9-15 in gray, alongside the original 
+#subject and query ranges. Note how these overlapping ranges differ from the
+#set created by intersect(qry, sbj) : while intersect() would create one range
+#for the regions of ranges a and d that overlap z , using ranges() with a Hits
+#object creates two separate ranges.
+
+# A nice feature of working with ranges in R is that we can leverage R’s full array of data
+# analysis capabilities to explore these ranges. For example, after using ranges(hts,
+# qry, sbj) to create a range corresponding to the region shared between each over‐
+# lapping query and subject range, you could use summary(width(ranges(hts, qry,
+# sbj))) to get a summary of how large the overlaps are, or use ggplot2 to plot a histo‐
+# gram of all overlapping widths. This is one of the largest benefits of working with
+# ranges within R—you can interactively explore and understand your results immedi‐
+# ately after generating them.
+summary(width(ranges(hts, qry,sbj)))
+```
+
+The functions subsetByOverlaps() and countOverlaps() simplify some of the most
+common operations performed on ranges once overlaps are found: keeping only the
+subset of queries that overlap subjects, and counting overlaps. Both functions allow
+you to specify the same type of overlap to use via the type argument, just as
+findOverlaps() does. Here are some examples using the objects qry and sbj we cre‐
+ated earlier:
+
+```{r}
+#countOverlaps is similar to the solution using countQueryOverlaps() and setNames()
+countOverlaps(qry, sbj)
+#subsetByOverlaps returns the same as qry[unique(queryHits(hts))] . You can
+#verify this yourself (and think through why unique() is necessary).
+subsetByOverlaps(qry, sbj)
+qry[unique(queryHits(hts))]
+qry[queryHits(hts)]
+```
+
+### Finding Nearest Ranges and Calculating Distance
+Another common set of operations on ranges focuses on finding ranges that neighbor
+query ranges. In the IRanges package, there are three functions for this type of opera‐
+tion: nearest() , precede() , and follow() . The nearest() function returns the near‐
+est range, regardless of whether it’s upstream or downstream of the query. precede()
+and follow() return the nearest range that the query is upstream of or downstream
+of, respectively. Each of these functions take the query and subject ranges as their first
+and second arguments, and return an index to which subject matches (for each of the
+query ranges).
+
+```{r}
+qry <- IRanges(start=6, end=13, name='query')
+sbj <- IRanges(start=c(2, 4, 18, 19), end=c(4, 5, 21, 24), names=1:4)
+plotIRanges(c(qry, sbj))
+```
+
+To keep precede() and follow() straight, remember that these functions are with
+respect to the query: precede() finds ranges that the query precedes and follow()
+finds ranges that the query follows. Also, illustrated in this example (seen in
+Figure above), the function nearest() behaves slightly differently than precede() and
+follow() . Unlike precede() and follow() , nearest() will return the nearest range
+even if it overlaps the query range. These subtleties demonstrate how vital it is to
+carefully read all function documentation before using libraries.
+
+```{r}
+nearest(qry, sbj)
+precede(qry, sbj)
+follow(qry, sbj)
+```
+
+Note too that these operations are all vectorized, so you can provide a query IRanges
+object with multiple ranges:
+```{r}
+qry2 <- IRanges(start=c(6, 7), width=3, names = c("qry1","qry2"))
+plotIRanges(c(qry2, sbj))
+```
+
+```{r}
+nearest(qry2, sbj)
+```
+
+This family of functions for finding nearest ranges also includes distan
+ceToNearest() and distance() , which return the distance to the nearest range and
+the pairwise distances between ranges. We’ll create some random ranges to use in this
+example:
+```{r}
+qry <- IRanges(sample(seq_len(1000), 5), width=10)
+sbj <- IRanges(sample(seq_len(1000), 5), width=10)
+```
+
+Now, let’s use distanceToNearest() to find neighboring ranges. It works a lot like
+findOverlaps() —for each query range, it finds the closest subject range, and returns
+everything in a Hits object with an additional column indicating the distance:
+
+```{r}
+distanceToNearest(qry, sbj)
+```
+
+The method distance() returns each pairwise distance between query and subject
+ranges:
+```{r}
+distance(qry, sbj)
+```
+
+###Run Length Encoding and Views
+The generic ranges implemented by IRanges can be ranges over any type of sequence.
+In the context of genomic data, these ranges’ coordinates are based on the underlying
+nucleic acid sequence of a particular chromosome. Yet, many other types of genomic
+data form a sequence of numeric values over each position of a chromosome
+sequence. Some examples include:
+• Coverage, the depth of overlap of ranges across the length of a sequence. Cover‐
+age is used extensively in genomics, from being an important factor in how var‐
+iants are called to being used to discover coverage peaks that indicate the
+presence of some feature (as in a ChIP-seq study).
+• Conservation tracks, which are base-by-base evolutionary conservation scores
+between species, generated by a program like phastCons (see Siepel et al., 2005 as
+an example).
+• Per-base pair estimates of population genomics summary statistics like nucleo‐
+tide diversity.
+
+####Run-length encoding and coverage()
+Long sequences can grow quite large in memory. For example, a track containing
+numeric values over each of the 248,956,422 bases of chromosome 1 of the human
+genome version GRCh38 would be 1.9Gb in memory. To accommodate working with
+data this size in R, IRanges can work with sequences compressed using a clever trick:
+it compresses runs of the same value. For example, imagine a sequence of integers
+that represent the coverage of a region in a chromosome:
+4 4 4 3 3 2 1 1 1 1 1 0 0 0 0 0 0 0 1 1 1 4 4 4 4 4 4 4
+Data like coverage often exhibit runs: consecutive stretches of the same value. We can
+compress these runs using a scheme called run-length encoding. Run-length encoding
+compresses this sequence, storing it as: 3 fours, 2 threes, 1 two, 5 ones, 7 zeros, 3 ones,
+7 fours. Let’s see how this looks in R:
+```{r}
+x <- as.integer(c(4, 4, 4, 3, 3, 2, 1, 1, 1, 1, 1, 0, 0, 0,
+0, 0, 0, 0, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4))
+xrle <- Rle(x)
+xrle
+# The function Rle() takes a vector and returns a run-length encoded version. Rle() is
+# a function from a low-level Bioconductor package called S4Vectors , which is auto‐
+# matically loaded with IRanges . We can revert back to vector form with as.vector() :
+as.vector(xrle)
+
+# Run-length encoded objects support most of the basic operations that regular R vec‐
+# tors do, including subsetting, arithemetic and comparison operations, summary
+# functions, and math functions:
+
+# We can also access an Rle object’s lengths and values using the functions run
+# Lengths() and runValues() :
+runLength(xrle)
+runValue(xrle)
+# While we don’t save any memory by run-length encoding vectors this short, run-
+# length encoding really pays off with genomic-sized data.
+# One place where we encounter run-length encoded values is in working with cover
+# age() . The coverage() function takes a set of ranges and returns their coverage as an
+# Rle object (to the end of the rightmost range). Simulating 70 random ranges over a
+# sequence of 100 positions:
+set.seed(0)
+rngs <- IRanges(start=sample(seq_len(60), 10), width=7)
+names(rngs)[9] <- "A" # label one range for examples later
+plotIRanges(rngs)
+rngs_cov <- coverage(rngs)
+rngs_cov
+```
+
+```{r}
+rngs_cov > 3 # where is coverage greater than 3?
+
+rngs_cov[as.vector(rngs_cov) > 3] # extract the depths that are greater than 3
+# Additionally, we also have the useful option of using IRanges objects to extract sub‐
+# sets of a run-length encoded sequence. Suppose we wanted to know what the cover‐
+# age was in the region overlapping the range labeled “A” in Figure 9-17. We can subset
+# Rle objects directly with IRanges objects:
+rngs_cov[rngs['A']]
+
+# If instead we wanted the mean coverage within this range, we could simply pass the
+# result to mean() :
+mean(rngs_cov[rngs['A']])
+# Numerous analysis tasks in genomics involve calculating a summary of some
+# sequence (coverage, GC content, nucleotide diversity, etc.) for some set of ranges
+# (repetitive regions, protein coding sequences, low-recombination regions, etc.).
+# These calculations are trivial once our data is expressed as ranges and sequences, and
+# we use the methods in IRanges . Later in this chapter, we’ll see how GenomicRanges
+# provides nearly identical methods tailored to these tasks on genomic data.
+```
+
+Going from run-length encoded sequences to ranges with slice()
+Earlier, we used rngs_cov > 3 to create a run-length encoded vector of TRUE / FALSE
+values that indicate whether the coverage for a position was greater than 3. Suppose
+we wanted to now create an IRanges object containing all regions where coverage is
+greater than 3. What we want is an operation that’s the inverse of using ranges to sub‐
+set a sequence—using a subset of sequence to define new ranges. In genomics, we use
+these types of operations that define new ranges quite frequently—for example, tak‐
+ing coverage and defining ranges corresponding to extremely high-coverage peaks, or
+a map of per-base pair recombination estimates and defining a recombinational hot‐
+spot region.
+It’s very easy to create ranges from run-length encoded vectors. The function slice()
+takes a run-length encoded numeric vector (e.g., of coverage) as its argument and sli‐
+ces it, creating a set of ranges where the run-length encoded vector has some minimal
+value. For example, we could take our coverage Rle object rngs_cov and slice it to
+create ranges corresponding to regions with more than 2x coverage:
+
+```{r}
+min_cov2 <- slice(rngs_cov, lower=2)
+min_cov2
+# This object that’s returned is called a view. Views combine a run-length encoded vec‐
+# tors and ranges, such that each range is a “view” of part of the sequence. In this case,
+# each view is a view on to the part of the sequence that has more than 2x coverage.
+# The numbers to the right of the ranges are the underlying elements of the run-length
+# encoded vector in this range. If you’re simply interested in ranges, it’s easy to extract
+# out the underlying ranges:
+ranges(min_cov2)
+# The slice() method is quite handy when we need to define coverage peaks—regions
+# where coverage of experimental data like aligned reads is high such that could indi‐
+# cate something biologically interesting. For example, after looking at a histogram of
+# genome-wide coverage, we could define a coverage threshold that encapsulates outli‐
+# ers, use slice() to find the regions with high coverage, and then see where these
+# regions fall and if they overlap other interesting biological features.
+```
+
+### Advanced IRanges: Views
+While they may seem a bit strange at first, views are incredibly handy. By combining
+a sequence vector and ranges, views simplify operations that involve aggregating a
+sequence vector by certain ranges. In this way, they’re similar to calculating per-group
+summaries as we did in Chapter 8, but groups are ranges.
+
+For example, we could summarize the views we created earlier using slice() using
+functions like viewMeans() , viewMaxs() , and even viewApply() , which applies an
+arbitrary function to views:
+
+```{r}
+viewMeans(min_cov2)
+viewMaxs(min_cov2)
+viewApply(min_cov2, median)
+```
+Each element of these returned vectors is a summary of a range’s underlying run-
+length encoded vector (in this case, our coverage vector min_cov2 summarized by the
+ranges we carved out using slice() ). Also, there are a few other built-in view sum‐
+marization methods; see help(viewMeans) for a full list.
+Using Views , we can also create summaries of sequences by window/bin. In the views
+lingo, we create a set of ranges for each window along a sequence and then summa‐
+rize the views onto the underlying sequence these windows create. For example, if we
+wanted to calculate the average coverage for windows 5-positions wide:
+```{r}
+# First, note that our coverage vector is 63 elements long. We want to create con‐
+# secutive windows along this sequence, with each window containing 5 elements.
+# If we do so, we’ll have 3 elements of the coverage vector hanging off the end (63
+# divided by 5 is 12, with a remainder of 3). These overhanging ends are a common
+# occurrence when summarizing data by windows, and it’s common to just ignore
+# these last elements. While cutting these elements off seems like a strange
+# approach, a summary calculated over a smaller range will have a higher variance
+# that can lead to strange results. Dropping this remainder is usually the simplest
+# and best option.
+length(rngs_cov)
+# We’ll set bwidth to be our bin width.
+bwidth <- 5L
+# Now, we compute the end position of our window. To do so, we divide our cover‐
+# age vector length by the bin width, and chop off the remainder using the floor()
+# function. Then, we multiply by the bin width to give the end position.
+end <- bwidth * floor(length(rngs_cov) / bwidth)
+
+# Next, we create our windows using IRanges . We use seq() to generate the start
+# positions: a start position from 1 to our end (60, as we just programmatically cal‐
+# culated), moving by 5 each time. If we wanted a different window step width, we
+# could change the third ( by ) argument of seq() here. With our start position
+# specified, we simply set width=bwidth to give each window range a width of 5.
+windows <- IRanges(start=seq(1, end, bwidth), width=bwidth)
+
+# With our run-length encoded coverage vector and our windows as IRanges
+# objects, we create our Views object. Views effectively groups each element of the
+# coverage vector rngs_cov inside a window.
+cov_by_wnd <- Views(rngs_cov, windows)
+
+# Finally, we compute summaries on these Views . Here we use viewMeans() to get
+# the mean coverage per window. We could use any other summarization view
+# method (e.g., viewMaxs() , viewSums() , etc.) or use viewApply() to apply any
+# function to each view.
+viewMeans(cov_by_wnd)
+```
+
+
+Summarizing a sequence of numeric values by window over a sequence such as a
+chromosome is a common task in genomics. The techniques used to implement the
+generic solution to this problem with ranges, run-length encoded vectors, and views
+are directly extensible to tackling this problem with real genomics data.
+Because GenomicRanges extends IRanges , everything we’ve learned in the previous
+sections can be directly applied to the genomic version of an IRanges object,
+GRanges . None of the function names nor behaviors differ much, besides two added
+complications: dealing with multiple chromosomes and strand. As we’ll see in the
+next sections, GenomicRanges manages these complications and greatly simplifies our
+lives when working with genomic data.
+
+### Storing Genomic Ranges with GenomicRanges
+The GenomicRanges package introduces a new class called GRanges for storing
+genomic ranges. The GRanges builds off of IRanges . IRanges objects are used to store
+ranges of genomic regions on a single sequence, and GRanges objects contain the two
+other pieces of information necessary to specify a genomic location: sequence name
+(e.g., which chromosome) and strand. GRanges objects also have metadata columns,
+which are the data linked to each genomic range. We can create GRanges objects
+much like we did with IRanges objects:
+```{r}
+library(GenomicRanges)
+gr <- GRanges(seqname=c("chr1", "chr1", "chr2", "chr3"),
+              ranges=IRanges(start=5:8, width=10),
+              strand=c("+", "-", "-", "+"))
+# Using the GRanges() constructor, we can also add arbitrary metadata columns by
+# specifying additional named arguments:
+gr <- GRanges(seqname=c("chr1", "chr1", "chr2", "chr3"),
+              ranges=IRanges(start=5:8, width=10),
+              strand=c("+", "-", "-", "+"), 
+              gc=round(runif(4), 3))
+
+# This illustrates the structure of GRanges objects: genomic location specified by
+# sequence name, range, and strand (on the left of the dividing bar), and metadata col‐
+# umns (on the right). Each row of metadata corresponds to a range on the same row.
+# All metadata attached to a GRanges object are stored in a DataFrame , which behaves
+# identically to R’s base data.frame , but supports a wider variety of column types. For
+# example, DataFrames allow for run-length encoded vectors to save memory (whereas
+# R’s base data.frame does not). Whereas in the preceding example metadata columns
+# are used to store numeric data, in practice we can store any type of data: identifiers
+# and names (e.g., for genes, transcripts, SNPs, or exons), annotation data (e.g., conser‐
+# vation scores, GC content, repeat content, etc.), or experimental data (e.g., if ranges
+# correspond to alignments, data like mapping quality and the number of gaps). As
+# we’ll see throughout the rest of this chapter, the union of genomic location with any
+# type of data is what makes GRanges so powerful.
+
+# Also, notice seqlengths in the gr object we’ve just created. Because GRanges (and
+# genomic range data in general) is always with respect to a particular genome version,
+# we usually know beforehand what the length of each sequence/chromosome is.
+# Knowing the length of chromosomes is necessary when computing coverage and
+# gaps (because we need to know where the end of the sequence is, not just the last
+# range). We can specify the sequence lengths in the GRanges constructor, or set it after
+# the object has been created using the seqlengths() function:
+
+seqlens <- c(chr1=152, chr2=432, chr3=903)
+
+gr <- GRanges(seqname=c("chr1", "chr1", "chr2", "chr3"),
+              ranges=IRanges(start=5:8, width=10),
+              strand=c("+", "-", "-", "+"),
+              gc=round(runif(4), 3),
+              seqlengths=seqlens)
+
+seqlengths(gr) <- seqlens # another way to do the same as above
+
+# We access data in GRanges objects much like we access data from IRanges objects:
+# with accessor functions. Accessors for start position, end position, and width are the
+# same as with IRanges object:
+start(gr)
+end(gr)
+width(gr)
+
+# For the GRanges -specific data like sequence name and strand, there are new accessor
+# functions— seqnames and strand :
+
+seqnames(gr)
+strand(gr)
+
+# The returned objects are all run-length encoded. If we wish to extract all IRanges
+# ranges from a GRanges object, we can use the ranges accessor function:
+
+ranges(gr)
+
+# Like most objects in R, GRanges has a length that can be accessed with length() , and
+# supports names:
+length(gr)
+names(gr) <- letters[1:length(gr)]
+gr
+
+# The best part of all is that GRanges objects support the same style of subsetting you’re
+# already familiar with (i.e., from working with other R objects like vectors and data‐
+# frames). For example, if you wanted all ranges with a start position greater than 7:
+
+start(gr) > 7
+gr[start(gr) > 7]
+
+# Once again, there’s no magic going on; GRanges simply interprets a logical vector of
+# TRUE / FALSE values given by start(gr) > 7 as which rows to include/exclude. Using
+# the seqname() accessor, we can count how many ranges there are per chromosome
+# and then subset to include only ranges for a particular chromosome:
+table(seqnames(gr))
+gr[seqnames(gr) == "chr1"]
+
+# The mcols() accessor is used access metadata columns:
+mcols(gr)
+# Because this returns a DataFrame and DataFrame objects closely mimic data.frame , $
+# works to access specific columns. The usual syntactic shortcut for accessing a column
+# works too:
+mcols(gr)$gc
+gr$gc
+
+# The real power is when we combine subsetting with the data kept in our metadata
+# columns. Combining these makes complex queries trivial. For example, we could
+# easily compute the average GC content of all ranges on chr1 :
+mcols(gr[seqnames(gr) == "chr1"])$gc
+mean(mcols(gr[seqnames(gr) == "chr1"])$gc)
+```
+
+### Grouping Data with GRangesList
+R’s lists can be used to group data together, such as after
+using split() to split a dataframe by a factor column. Grouping data this way is use‐
+ful for both organizing data and processing it in chunks. GRanges objects also have
+their own version of a list, called GRangesList , which are similar to R’s lists. GRanges
+Lists can be created manually:
+```{r}
+gr1 <- GRanges(c("chr1", "chr2"), IRanges(start=c(32, 95), width=c(24, 123)))
+gr2 <- GRanges(c("chr8", "chr2"), IRanges(start=c(27, 12), width=c(42, 34)))
+grl <- GRangesList(gr1, gr2)
+grl
+
+# GRangesList objects behave almost identically to R’s lists:
+
+# unlist() combines all GRangesList elements into a single GRanges object (much
+# like unlisting an R list of vectors to create one long vector).
+unlist(grl)
+doubled_grl <- c(grl, grl)
+doubled_grl
+# We can combine many GRangesList objects with c() .
+# Accessing certain elements works exactly as it did with R’s lists. Single brackets return
+# GRangesList objects, and double brackets return what’s in a list element—in this case,
+# a GRanges object:
+doubled_grl[2]
+doubled_grl[[2]]
+```
+
+
+```{r}
+chrs <- c("chr3", "chr1", "chr2", "chr2", "chr3", "chr1")
+gr <- GRanges(chrs, IRanges(sample(1:100, 6, replace=TRUE),width=sample(3:30, 6, replace=TRUE)))
+gr_split <- split(gr, seqnames(gr))
+gr_split[[1]]
+names(gr_split)
+
+# Bioconductor also provides an unsplit() method to rejoin split data on the same
+# factor that was used to split it. For example, because we created gr_split by splitting
+# on seqnames(gr) , we could unsplit gr_split with unsplit(gr_split, seq
+# names(gr)).
+```
+
+So why split GRanges objects into GRangesList objects? The primary reason is that
+GRangesList objects, like R’s base lists, are a natural way to group data. For example,
+if we had a GRanges object containing all exons, we may want to work with exons
+grouped by what gene or transcript they belong to. With all exons grouped in a
+GRangesList object, exons for a particular gene or transcript can be returned by
+accessing a particular list element.
+Grouped data is also the basis of the split-apply-combine pattern (covered in “Work‐
+ing with the Split-Apply-Combine Pattern” on page 239). With R’s base lists, we could
+use lapply() and sapply() to iterate through all elements and apply a function. Both
+of these functions work with GRangesLists objects, too:
+```{r}
+# Return the order of widths (smallest range to largest) of each GRanges element in
+# a GRangesList.
+lapply(gr_split, function(x) order(width(x)))
+
+# Return the start position of the earliest (leftmost) range.
+sapply(gr_split, function(x) min(start(x)))
+
+# The number of ranges in every GRangesList object can be returned with this R idiom.
+sapply(gr_split, length)
+# However, a faster approach to calculating element lengths is with the specialized function elementLengths()
+
+elementLengths(gr_split)
+
+```
+lapply() and sapply() (as well as mapply() ) give you the most freedom to write and
+use your own functions to apply to data. However, for many overlap operation func‐
+tions (e.g., reduce() , flank() , coverage() , and findOverlaps() ), we don’t need to
+explicitly apply them—they can work directly with GRangesList objects. For exam‐
+ple, reduce() called on a GRangesList object automatically works at the list-element
+level:
+
+```{r}
+reduce(gr_split)
+```
+
+reduce() illustrates an important (and extremely helpful) property of GRangesList
+objects: many methods applied to GRangesList objects work at the grouped-data
+level automatically. Had this list contained exons grouped by transcript, only overlap‐
+ping exons within a list element (transcript) would be collapsed with reduce() . findO
+verlaps() behaves similarly; overlaps are caclulated at the list-element level. We’ll see
+a more detailed example of findOverlaps() with GRangesList objects once we start
+working with real annotation data in the next section.
+
+
+### Working with Annotation Data: GenomicFeatures and rtracklayer
+
+GenomicFeatures , is designed for working with transcript-based genomic anno‐
+tations. The second, rtracklayer , is designed for importing and exporting annota‐
+tion data into a variety of different formats. As with other software covered in this
+book, both of these packages have lots of functionality that just can’t be covered in a
+single section; I highly recommend that you consult both packages’ vignettes.
+GenomicFeatures is a Bioconductor package for creating and working with
+transcript-based annotation. GenomicFeatures provides methods for creating and
+working with TranscriptDb objects. These TranscriptDb objects wrap annotation
+data in a way that allows genomic features, like genes, transcripts, exons, and coding
+sequences (CDS), to be extracted in a consistent way, regardless of the organism and
+origin of the annotation data. In this section, we’ll use a premade TranscriptDb
+object, contained in one of Bioconductor’s transcript annotation packages. Later on,
+we’ll see some functions GenomicFeatures has for creating TranscriptDb objects (as
+well as transcript annotation packages) from external annotation data.
+```{r}
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#     install.packages("BiocManager")
+# BiocManager::install("GenomicFeatures", version = "3.8")
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#     install.packages("BiocManager")
+# BiocManager::install("TxDb.Mmusculus.UCSC.mm10.ensGene", version = "3.8")
+library(GenomicFeatures)
+library(TxDb.Mmusculus.UCSC.mm10.ensGene)
+txdb <- TxDb.Mmusculus.UCSC.mm10.ensGene
+mm_genes <- genes(txdb)
+head(mm_genes)
+length(mm_genes)
+# GenomicFeatures returns the data in a GRanges object, so all the tricks we’ve learned
+# for working with GRanges can be used to work with this data.
+
+# Note that the GRanges object containing all mouse genes has 39,014 ranges. This
+# includes coding genes, short noncoding genes, long noncoding genes, and pseudo‐
+# genes—everything that comprises the entire ensGene track on UCSC (and all genes
+# with an Ensembl gene identifier). It’s always a good idea to make sure you know what
+# you’re getting with gene annotation; you should also validate that the totals make
+# sense against an external source. For example, I’ve validated that the total number of
+# genes is consistent with Ensembl’s gene annotation summary page for mouse genome
+# version mm10.
+
+# GenomicFeatures has other functions for retrieving all transcripts, exons, coding
+# sequences (CDS), and promoters—the functions transcripts() , exons() , cds() ,
+# and promoters() . Consult the documentation for this family of functions for extract‐
+# ing information from transcriptDb objects at help(transcripts) .
+# It’s often more natural to work with a GRangesList object of these types of features
+# grouped by some other type of feature than working with a massive GRanges list
+# object of everything. For example, we might want to retrieve all exons grouped by
+# transcript or gene:
+mm_exons_by_tx <- exonsBy(txdb, by="tx")
+mm_exons_by_gn <- exonsBy(txdb, by="gene")
+length(mm_exons_by_tx)
+length(mm_exons_by_gn)
+# These functions that extract grouped features all take the transcriptDb object as
+# their first argument and which type of feature to group by (e.g., gene, tx, exon, or cds)
+# as their second argument. There are variety of these types of functions—for example,
+# transcriptsBy() , exonsBy() , cdsBy() , intronsBy() , fiveUTRsByTranscript() , and
+# threeUTRsByTranscript() (see help(transcriptsBy) for more information).
+
+# GenomicFeatures also provides functions for extracting subsets of features that over‐
+# lap a specific chromosome or range. We can limit our queries to use a subset of chro‐
+# mosomes by setting which sequences our transcriptDb should query using the
+# following approach:
+
+seqlevels(txdb) <- "chr1"
+chr1_exons <- exonsBy(txdb, "tx")
+all(unlist(seqnames(chr1_exons)) == "chr1")
+txdb <- restoreSeqlevels(txdb) # restore txdb so it queries all sequences
+```
+
+To extract feature data that only overlaps a specific region, use the following family of
+functions: transcriptsByOverlaps() , exonsByOverlaps() , and cdsByOverlaps()
+(see help(transcriptByOverlaps() for more information). For example, say a QTL
+study has identified a quantitative trait loci in the region roughly on chromosome 8,
+from 123,260,562 to 123,557,264. Our coordinates are rough, so we’ll add 10kbp.
+Recall that with IRanges , we grow ranges by a fixed number of bases by adding that
+number of bases to the object (from “Basic Range Operations: Arithmetic, Transfor‐
+mations, and Set Operations” on page 275); the same method is used to resize
+GRanges objects. So we can get all genes within this expanded region with:
+
+```{r}
+qtl_region <- GRanges("chr8", IRanges(123260562, 123557264))
+qtl_region_expanded <- qtl_region + 10e3
+transcriptsByOverlaps(txdb, qtl_region_expanded)
+
+# transcriptByOverlaps() returns all transcripts overlapping this range. All functions
+# in this family also take a maxgap argument, which can be used to specify how large a
+# gap between ranges is considered an overlap (0 by default). Setting the maxgap argu‐
+# ment to 10kbp has the same effect as widening our ranges and then extracting ele‐
+# ments as we did in the preceding example.
+```
+
+The transcriptDb objects and the methods provided by the GenomicFeatures pack‐
+age provide a consistent representation of transcript-based annotation and consistent
+functions for interacting with these objects. However, like everything in life, there are
+trade-offs. Convenience and consistency can come at the cost of flexibility. The
+rtracklayer package includes flexible functions for importing and exporting data
+that stores ranges from a variety of formats like GTF/GFF, BED, BED Graph, and
+Wiggle. These functions automatically convert entries to GRanges objects and handle
+technicalities like missing values and assigning columns in the file to metadata col‐
+umns—features that general solutions like read.delim() don’t have.
+
+```{r}
+library(rtracklayer)
+mm_gtf <- import('./data/Mus_musculus.GRCm38.75_chr1.gtf.gz')
+colnames(mcols(mm_gtf)) # metadata columns read in
+```
+The function import() detects the file type (with hints from the file extension—
+another reason to use the proper extension) and imports all data as a GRanges object.
+There are also specific functions (e.g., import.bed() , import.gff() , import.wig() ,
+etc.) that can you can use if you want to specify the format.
+The rtracklayer package also provides export methods, for taking range data and
+saving it to a variety of common range formats. For example, suppose we wanted to
+write five random pseudogenes to a GTF file.
+```{r}
+set.seed(0)
+pseudogene_i <- which(mm_gtf$gene_biotype == "pseudogene" & mm_gtf$type == "gene")
+pseudogene_sample <- sample(pseudogene_i, 5)
+export(mm_gtf[pseudogene_sample], con="five_random_pseudogene.gtf", format="GTF")
+```
+
+If we didn’t care about the specifics of these ranges (e.g., the information stored in the
+metadata columns), the BED file format may be more appropriate. BED files require
+at a minimum three columns: chromosomes (or sequence name), start position, and
+end position (sometimes called the BED3 format). The easiest way to save only this
+information would be:
+```{r}
+bed_data <- mm_gtf[pseudogene_sample]
+mcols(bed_data) <- NULL # clear out metadata columns
+export(bed_data, con="five_random_pseudogene.bed", format="BED")
+```
+Finally, it’s worth noting that we’re just scratching the surface of rtracklayer ’s capa‐
+bilities. In addition to its import / export functions, rtracklayer also interfaces with
+genome browsers like UCSC’s Genome Browser. Using rtracklayer , one can create
+tracks for UCSC’s browser directly from GRanges objects and send these to a UCSC
+Genome Browser web session directly from R. If you find yourself using the UCSC
+Genome Browser frequently, it’s worth reading the rtracklayer vignette and learn‐
+ing how to interact with it through R.
+
+### Retrieving Promoter Regions: Flank and Promoters
+Now, let’s start seeing how the range operations in GenomicRanges can solve real bio‐
+informatics problems. For example, suppose we wanted to grab the promoter regions
+of all protein-coding genes from the GRCh38 Mus musculus Ensembl GTF annota‐
+tion track for chromosome 1 we loaded in using rtracklayer in the previous section.
+We’ll use this object rather than extracting genes from a transcriptDb object because
+it contains additional information about the type of transcript (such as the gene_bio
+type and type columns we used in the previous section to find pseudogenes). So, first
+we could find the subset of genes we’re interested in—in this case, let’s say all protein
+coding genes:
+```{r}
+# First, let’s do some basic EDA. We know we want to select protein coding genes,
+# which we can do by subsetting the gene_bioype column. Calling table() on it
+# returns the number of features of each biotype. A full list of biotypes can be
+# found on the GENCODE website. We see that there are around 78,000 features
+# with the protein coding biotype.
+table(mm_gtf$gene_biotype)
+# Next, we can subset all features that have type “gene” (rather than exon, CDS,
+# transcript, etc.) and biotype “protein_coding.” As a sanity check, we make sure
+# that the length distribution and number of features makes sense (remember, this
+# is just chromosome 1 data).
+chr1_pcg <- mm_gtf[mm_gtf$type == "gene" & mm_gtf$gene_biotype == "protein_coding"]
+summary(width(chr1_pcg))
+length(chr1_pcg)
+# Then, we can use flank to grab 3kbp upstream of each feature. Read
+# help(flank) to refresh your memory of this method. You first question should
+# be, “how does flank() handle strand?” Looking at the documentation, we see
+# that by default flank() takes strand into consideration (option
+# ignore.strand=FALSE ), so we just specify the width of our flanking region. Note
+# that our promoter regions are those defined from the start of our gene region to
+# 3kbp upstream.
+chr1_pcg_3kb_up <- flank(chr1_pcg, width=3000)
+# Extracting promoter regions is such a common operation that GenomicRanges pack‐
+# ages have a convenience function to make it even simpler: promoters() . promoters()
+# default arguments extract 3kbp upstream of each range, and 200bp downstream. For
+# example, we could mimic our flank() call and show that the results are identical
+# with:
+chr1_pcg_3kb_up2 <- promoters(chr1_pcg, upstream=3000, downstream=0)
+identical(chr1_pcg_3kb_up, chr1_pcg_3kb_up2)
+```
+
+
+```{r}
+# shift() shifts all the ranges in x by the amount specified by the shift argument.
+shift(rng, shift = 2)
+shift(rng, shift = -2)
+# narrow() the ranges in x i.e. each range in the returned IntegerRanges object is a subrange of the corresponding range in x. The supplied start/end/width values are solved by a call to solveUserSEW(width(x), start=start, end=end, width=width) and therefore must be compliant with the rules of the SEW (Start/End/Width) interface (see ?solveUserSEW for the details). Then each subrange is derived from the original range according to the solved start/end/width values for this range. Note that those solved values are interpreted relatively to the original range.
+narrow(rng,start = 5, end = 8)
+# resize() resizes the ranges to the specified width where either the start, end, or center is used as an anchor.
+resize(rng, width = 5, fix = "start") 
+tss <- IRanges(start = 1:20, width = 1)
+promoters(tss)
+# reduce() first orders the ranges in x from left to right, then merges the overlapping or adjacent ones.
+set.seed(123)
+x <- IRanges(start = sample(seq(20),3), width = 10)
+gaps(x)
+disjoin(x) # find non-overlapping
+```
+
+
+```{r}
+query <- IRanges(c(1, 4, 9), c(5, 7, 10))
+subject <- IRanges(c(2, 2, 10), c(2, 3, 12))
+#nearest() find nearest gene name
+nearest(query,subject) 
+ov <- findOverlaps(query, subject)
+
+split(queryHits(ov), subjectHits(ov))
+```
+
+
+
+### use GRanges to store the data
+
+### use AnnotationHub to get online resources
+```{r}
+
+library(AnnotationHub)
+ahub = AnnotationHub()
+ahub = subset(ahub,species =="Homo sapiens")
+qhs = query(ahub,c("H3K4me3","Gm12878"))
+gr1 = qhs[[4]]
+qhs = query(ahub,"RefSeq")
+genes = qhs[[1]]
+prom = promoters(genes)
+
+```
+
