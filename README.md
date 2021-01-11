@@ -1,5 +1,13 @@
 ## Helpful information to read further
 
+### Interaction analyses – Power (part 1)
+https://davidbaranger.com/2019/08/06/interaction-analyses-power-part-1/
+### Interaction analyses – Interpreting effect sizes (part 2)
+https://davidbaranger.com/2019/08/06/interaction-analyses-interpreting-effect-sizes-part-2/
+
+### Interaction analyses – How large a sample do I need? (part 3)
+https://davidbaranger.com/2019/08/06/interaction-analyses-how-large-a-sample-do-i-need-part-3/
+
 ### Time series differential gene expression with kallisto and sleuth
 http://www.nxn.se/valent/timecourse-analysis-with-sleuth
 
