@@ -28,7 +28,8 @@ http://bioconductor.org/packages/release/bioc/vignettes/BASiCS/inst/doc/BASiCS.h
 http://www.nxn.se/valent/timecourse-analysis-with-sleuth
 
 ## dimension reduction
-#### Density-Preserving Data Visualization Unveils Dynamic Patterns of Single-Cell Transcriptomic Variability
+#### densVis: Density-Preserving Data Visualization Unveils Dynamic Patterns of Single-Cell Transcriptomic Variability
+
 https://bioconductor.org/packages/release/bioc/vignettes/densvis/inst/doc/densvis.html
 
 #### Unproper use of PCA: PCA or ICA
