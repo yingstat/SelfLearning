@@ -76,6 +76,9 @@ https://bioconductor.org/packages/release/bioc/vignettes/IgGeneUsage/inst/doc/Ig
 https://alanocallaghan.github.io/heatmaplyExamples/
 https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html
 
+#### ggdist: Visualizations of distributions and uncertainty
+https://mjskay.github.io/ggdist/index.html
+
 
 ## data
 #### Streaming RNA-seq data from ENA
@@ -128,7 +131,12 @@ https://stm.sciencemag.org/content/early/2021/01/06/scitranslmed.abe8146
 https://www.nature.com/articles/s41586-020-2577-1
 
 ## cancer related
-
+#### Precision Oncology: The Road Ahead
+https://www.sciencedirect.com/science/article/abs/pii/S1471491417301430
+### Transcriptomic alterations during ageing reflect the shift from cancer to degenerative diseases in the elderly
+https://www.nature.com/articles/s41467-017-02395-2
+#### UVB-Induced Tumor Heterogeneity Diminishes Immune Response in Melanoma
+https://www.sciencedirect.com/science/article/abs/pii/S0092867419309511
 #### Synthetic lethality across normal tissues is strongly associated with cancer risk, onset, and tumor suppressor specificity
 https://advances.sciencemag.org/content/7/1/eabc2100
 
