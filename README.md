@@ -18,6 +18,7 @@ http://www.nxn.se/valent/2016/10/3/the-first-steps-in-rna-seq-expression-analysi
 #### a blog must read blog
 https://alanocallaghan.github.io/
 ### BASiCS (Bayesian Analysis of Single-Cell Sequencing data)
+https://bioconductor.org/packages/release/bioc/html/BASiCS.html
 http://bioconductor.org/packages/release/bioc/vignettes/BASiCS/inst/doc/BASiCS.html
 
 
