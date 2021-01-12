@@ -1,22 +1,50 @@
-## Helpful information to read further
+# Helpful information to read further
 
-### Interaction analyses – Power (part 1)
-https://davidbaranger.com/2019/08/06/interaction-analyses-power-part-1/
-### Interaction analyses – Interpreting effect sizes (part 2)
-https://davidbaranger.com/2019/08/06/interaction-analyses-interpreting-effect-sizes-part-2/
+## Bayesian
+Bayesian estimation and optimisation of expected FDR and expected FNR
+https://alanocallaghan.github.io/bayefdr/
 
-### Interaction analyses – How large a sample do I need? (part 3)
-https://davidbaranger.com/2019/08/06/interaction-analyses-how-large-a-sample-do-i-need-part-3/
+## single cell
+### Scater: pre-processing, quality control, normalisation and visualisation of single-cell RNA-seq data in R
+
+http://bioconductor.org/packages/release/bioc/vignettes/scater/inst/doc/overview.html
+
+## single cell & bayesian
+### a blog must read blog
+https://alanocallaghan.github.io/
+### BASiCS (Bayesian Analysis of Single-Cell Sequencing data)
+http://bioconductor.org/packages/release/bioc/vignettes/BASiCS/inst/doc/BASiCS.html
+
+
+## bulk RNA-Seq data analysis
 
 ### Time series differential gene expression with kallisto and sleuth
 http://www.nxn.se/valent/timecourse-analysis-with-sleuth
 
+## dimension reduction
+### Density-Preserving Data Visualization Unveils Dynamic Patterns of Single-Cell Transcriptomic Variability
+https://bioconductor.org/packages/release/bioc/vignettes/densvis/inst/doc/densvis.html
+
+
 ### Unproper use of PCA: PCA or ICA
 http://www.nxn.se/valent/improper-applications-of-principal-component
 
+## visualization
+### ploty
+https://plotly.com/ggplot2/
+### some utility functions and htmlwidgets for plotly, and a related talk
+https://alanocallaghan.github.io/plotlyvignettes/
 ### High contrast stacked distribution plots
 http://www.nxn.se/valent/high-contrast-stacked-distribution-plots
 
+## heatmap
+### heatmaply
+https://alanocallaghan.github.io/heatmaplyExamples/
+
+https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html
+
+
+## data
 ### Streaming RNA-seq data from ENA
 http://www.nxn.se/valent/streaming-rna-seq-data-from-ena
 
