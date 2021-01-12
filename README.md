@@ -145,6 +145,10 @@ https://pubmed.ncbi.nlm.nih.gov/33221766/
 https://www.futuremedicine.com/doi/full/10.2217/lmt-2019-0013
 
 ## Virus and Cancer
+
+#### Spliceosome-Targeted Therapies Induce dsRNA Responses
+https://www.cell.com/immunity/fulltext/S1074-7613(20)30540-9
+
 #### Virus Mimicry and Cancer Immunotherapy
 https://www.minnlab.org/cancer-therapy-and-virus-mimicry
 
