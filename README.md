@@ -29,8 +29,10 @@ http://www.nxn.se/valent/timecourse-analysis-with-sleuth
 
 ## dimension reduction
 #### densVis: Density-Preserving Data Visualization Unveils Dynamic Patterns of Single-Cell Transcriptomic Variability
-
 https://bioconductor.org/packages/release/bioc/vignettes/densvis/inst/doc/densvis.html
+
+#### Tuning parameters of dimensionality reduction methods for single-cell RNA-seq analysis
+https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02128-7
 
 #### Unproper use of PCA: PCA or ICA
 http://www.nxn.se/valent/improper-applications-of-principal-component
