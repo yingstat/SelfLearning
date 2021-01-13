@@ -103,7 +103,7 @@ https://chagall.med.cornell.edu/UNIXcourse/
 #### R Workshop Course Materials
 https://chagall.med.cornell.edu/Rcourse/
 
-#### Tidytuesday
+#### TidyTuesday
 https://thomasmock.netlify.app/post/tidytuesday-a-weekly-social-data-project-in-r/
 
 ## python
