@@ -81,6 +81,14 @@ https://mjskay.github.io/ggdist/index.html
 
 
 ## data
+#### multi-omics cancer 
+##### Multi-omic and multi-view clustering algorithms: review and cancer benchmark 
+##### Benchmarking joint multi-omics dimensionality reduction approaches for the study of cancer
+http://acgt.cs.tau.ac.il/multi_omic_benchmark/download.html 
+https://github.com/ComputationalSystemsBiology/momix-notebook/tree/master/data
+
+
+
 #### Streaming RNA-seq data from ENA
 http://www.nxn.se/valent/streaming-rna-seq-data-from-ena
 
