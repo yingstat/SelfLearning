@@ -103,6 +103,9 @@ https://chagall.med.cornell.edu/UNIXcourse/
 #### R Workshop Course Materials
 https://chagall.med.cornell.edu/Rcourse/
 
+#### Tidytuesday
+https://thomasmock.netlify.app/post/tidytuesday-a-weekly-social-data-project-in-r/
+
 ## python
 #### 笨办法学 Python(第四版）
 https://raw.githubusercontent.com/codeteenager/Ebook-1/master/%E7%AC%A8%E5%8A%9E%E6%B3%95%E5%AD%A6%20Python(%E7%AC%AC%E5%9B%9B%E7%89%88%EF%BC%89.pdf
