@@ -61,6 +61,8 @@ http://www.nxn.se/valent/improper-applications-of-principal-component
 ## visualization
 #### Accelerate your plots with ggforce 
 https://rviews.rstudio.com/2019/09/19/intro-to-ggforce/
+#### ggdist: Visualizations of distributions and uncertainty
+https://mjskay.github.io/ggdist/index.html
 #### ploty
 https://plotly.com/ggplot2/
 #### some utility functions and htmlwidgets for plotly, and a related talk
@@ -76,8 +78,7 @@ https://bioconductor.org/packages/release/bioc/vignettes/IgGeneUsage/inst/doc/Ig
 https://alanocallaghan.github.io/heatmaplyExamples/
 https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html
 
-#### ggdist: Visualizations of distributions and uncertainty
-https://mjskay.github.io/ggdist/index.html
+
 
 
 ## data
