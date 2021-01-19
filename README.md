@@ -86,6 +86,9 @@ https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html
 #### DBSCAN
 http://www.sthda.com/english/wiki/wiki.php?id_contents=7940
 
+#### Statistical significance for hierarchical clustering
+https://onlinelibrary.wiley.com/doi/full/10.1111/biom.12647
+
 
 ## data
 #### multi-omics cancer 
