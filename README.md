@@ -92,6 +92,9 @@ https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html
 http://acgt.cs.tau.ac.il/multi_omic_benchmark/download.html 
 https://github.com/ComputationalSystemsBiology/momix-notebook/tree/master/data
 
+##### rRNA-depletion mRNA-enrichment, H3K27ac, H3K4me1, DNA methylation 
+
+https://rna-seqblog.com/poly-a-enrichment-or-rrna-depletion-how-library-construction-influences-rna-sequencing-data/
 
 
 #### Streaming RNA-seq data from ENA
