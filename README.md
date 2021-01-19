@@ -73,10 +73,14 @@ http://www.nxn.se/valent/high-contrast-stacked-distribution-plots
 #### IgGeneUsage
 https://bioconductor.org/packages/release/bioc/vignettes/IgGeneUsage/inst/doc/IgUsageCaseStudies.html
 
+#### gggens
+https://cran.r-project.org/web/packages/gggenes/vignettes/introduction-to-gggenes.html
+
 ## heatmap
 #### heatmaply
 https://alanocallaghan.github.io/heatmaplyExamples/
 https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html
+
 
 
 
