@@ -5,6 +5,9 @@
 https://alanocallaghan.github.io/bayefdr/
 
 ## single cell
+#### 12 Grand Challenges in Single-Cell DataScience
+https://peerj.com/preprints/27885.pdf
+
 #### Machine learning single cell courses
 https://www.krishnaswamylab.org/workshop/2019
 
