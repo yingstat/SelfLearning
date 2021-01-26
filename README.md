@@ -1,8 +1,16 @@
 # Helpful information to read further
 
-## Bayesian
+## Bayesian and others
 #### Bayesian estimation and optimisation of expected FDR and expected FNR
 https://alanocallaghan.github.io/bayefdr/
+#### What does effect size tell you?
+https://www.simplypsychology.org/effect-size.html
+#### Make a difference: the alternative for p-values
+https://thenode.biologists.com/quantification-of-differences-as-alternative-for-p-values/research/
+#### Moving beyond P values: data analysis with estimation graphics
+https://www.nature.com/articles/s41592-019-0470-3
+#### Using dabestr: How to create estimation plots
+https://cran.r-project.org/web/packages/dabestr/vignettes/using-dabestr.html
 
 ## single cell
 #### 12 Grand Challenges in Single-Cell DataScience
