@@ -75,6 +75,10 @@ https://mbernste.github.io/posts/intrinsic_dimensionality/
 http://www.nxn.se/valent/improper-applications-of-principal-component
 
 ## visualization
+
+#### do not use a boxplot to visualize data with a bimodal distribution, more on this:
+https://www.huber.embl.de/msmb/Chap-Graphics.html#boxplots
+
 #### Accelerate your plots with ggforce 
 https://rviews.rstudio.com/2019/09/19/intro-to-ggforce/
 #### ggdist: Visualizations of distributions and uncertainty
