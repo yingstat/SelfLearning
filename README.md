@@ -13,6 +13,9 @@ https://www.nature.com/articles/s41592-019-0470-3
 https://cran.r-project.org/web/packages/dabestr/vignettes/using-dabestr.html
 
 ## single cell
+#### Collections of Benchmark studies 
+https://www.biomedcentral.com/collections/benchmarkingstudies
+
 #### 12 Grand Challenges in Single-Cell DataScience
 https://peerj.com/preprints/27885.pdf
 
