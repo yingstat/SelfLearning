@@ -23,6 +23,10 @@ https://www.nature.com/articles/s41592-019-0470-3
 https://cran.r-project.org/web/packages/dabestr/vignettes/using-dabestr.html
 
 ## single cell
+
+#### scDataviz: single cell dataviz and downstream analyses
+https://bioconductor.org/packages/release/bioc/vignettes/scDataviz/inst/doc/scDataviz.html
+
 #### All code, processed data and underlying structures of "Mapping the Immune Environment in Clear Cell Renal Carcinoma by Single-Cell Genomics"
 https://zenodo.org/record/4311825
 #### Collections of Benchmark studies 
@@ -66,6 +70,11 @@ http://www.trii.org/courses/
 http://www.nxn.se/valent/timecourse-analysis-with-sleuth
 
 ## dimension reduction or clustering
+
+#### PCAtools
+
+https://bioconductor.org/packages/release/bioc/vignettes/PCAtools/inst/doc/PCAtools.html
+
 #### scClustViz: Single-cell RNAseq cluster assessment and visualization
 https://f1000research.com/articles/7-1522
 
@@ -85,6 +94,13 @@ https://mbernste.github.io/posts/intrinsic_dimensionality/
 http://www.nxn.se/valent/improper-applications-of-principal-component
 
 ## visualization
+
+#### Visualise correlation results and test significancies of these
+https://github.com/kevinblighe/CorLevelPlot
+
+
+#### EnhancedVolcano: publication-ready volcano plots with enhanced colouring and labeling
+https://bioconductor.org/packages/release/bioc/vignettes/EnhancedVolcano/inst/doc/EnhancedVolcano.html
 
 #### do not use a boxplot to visualize data with a bimodal distribution, more on this:
 https://www.huber.embl.de/msmb/Chap-Graphics.html#boxplots
@@ -125,6 +141,8 @@ http://www.sthda.com/english/wiki/wiki.php?id_contents=7940
 https://onlinelibrary.wiley.com/doi/full/10.1111/biom.12647
 
 ## Survival analysis
+#### Standard regression functions in R enabled for parallel processing over large data-frames
+https://bioconductor.org/packages/release/data/experiment/vignettes/RegParallel/inst/doc/RegParallel.html
 https://cran.r-project.org/web/packages/survival/
 https://cran.r-project.org/web/views/Survival.html
 https://rviews.rstudio.com/2017/09/25/survival-analysis-with-r/
