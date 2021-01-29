@@ -1,4 +1,9 @@
 # Helpful information to read further
+#### Statistical rethinking with brms, ggplot2, and the tidyverse: Second edition
+https://bookdown.org/content/4857/
+
+#### Doing Bayesian Data Analysis in brms and the tidyverse
+https://bookdown.org/content/3686/
 
 ## Bayesian and others
 #### Bayesian estimation and optimisation of expected FDR and expected FNR
