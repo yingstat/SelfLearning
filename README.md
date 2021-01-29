@@ -202,6 +202,9 @@ https://www.freecodecamp.org/news/a-beginner-friendly-introduction-to-containers
 https://abc.med.cornell.edu/
 https://chagall.med.cornell.edu/UNIXcourse/
 ## R
+
+#### slides for useR 2019
+https://user2019.r-project.org/talk_schedule/
 #### R Workshop Course Materials
 https://chagall.med.cornell.edu/Rcourse/
 
