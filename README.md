@@ -95,6 +95,10 @@ http://www.nxn.se/valent/improper-applications-of-principal-component
 
 ## visualization
 
+#### How to VisualiE and Handle Missing Data in R with simputation
+
+https://www.business-science.io/code-tools/2021/01/19/handle-missing-data.html
+
 #### Visualise correlation results and test significancies of these
 https://github.com/kevinblighe/CorLevelPlot
 
