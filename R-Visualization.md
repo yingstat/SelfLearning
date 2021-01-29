@@ -1,4 +1,4 @@
-## visualization
+## Visualization
 
 #### How to VisualiE and Handle Missing Data in R with simputation
 
