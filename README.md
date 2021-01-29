@@ -24,6 +24,14 @@ https://cran.r-project.org/web/packages/dabestr/vignettes/using-dabestr.html
 
 ## single cell
 
+#### VeloViz creates RNA-velocity-informed 2D embeddings for single cell transcriptomics data.
+https://jef.works/veloviz/
+https://jef.works/veloviz/pancreas
+https://jef.works/veloviz/merfish
+https://jef.works/veloviz/simulation
+#### HoneyBADGER HoneyBADGER (hidden Markov model integrated Bayesian approach for detecting CNV and LOH events from single-cell RNA-seq data) identifies and infers the presence of CNV and LOH events in single cells and reconstructs subclonal architecture using allele and expression information from single-cell RNA-sequencing data.
+https://jef.works/HoneyBADGER/
+
 #### scDataviz: single cell dataviz and downstream analyses
 https://bioconductor.org/packages/release/bioc/vignettes/scDataviz/inst/doc/scDataviz.html
 
