@@ -123,6 +123,11 @@ https://bioconductor.org/packages/release/bioc/vignettes/IgGeneUsage/inst/doc/Ig
 https://cran.r-project.org/web/packages/gggenes/vignettes/introduction-to-gggenes.html
 
 ## Heatmap
+
+#### A simple tutorial for a complex ComplexHeatmap
+https://github.com/kevinblighe/E-MTAB-6141
+
+
 #### heatmaply
 https://alanocallaghan.github.io/heatmaplyExamples/
 https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html
