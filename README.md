@@ -2,6 +2,9 @@
 
 ## Bayesian and others
 
+#### blog and books must read
+https://solomonkurz.netlify.app/post/
+
 #### Statistical rethinking with brms, ggplot2, and the tidyverse: Second edition
 https://bookdown.org/content/4857/
 
