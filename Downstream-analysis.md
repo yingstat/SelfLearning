@@ -20,7 +20,7 @@ https://stephenturner.github.io/deseq-to-fgsea/
 https://crazyhottommy.github.io/scRNA-seq-workshop-Fall-2019/scRNAseq_workshop_3.html
 
 #### gprofiler2 -- an R package for gene list functional enrichment analysis and namespace conversion toolset g:Profiler
-
+https://cran.r-project.org/web/packages/gprofiler2/vignettes/gprofiler2.html
 https://f1000research.com/articles/9-709/v1
 https://t.co/QYsXUg6WoF
 
