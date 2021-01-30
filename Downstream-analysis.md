@@ -14,8 +14,10 @@ https://www.biostars.org/p/350710/#350712
 #### Hallmark gene set collection
 https://www.gsea-msigdb.org/gsea/msigdb/collections.jsp
 
-#### https://bioconductor.org/packages/fgsea
-#### https://stephenturner.github.io/deseq-to-fgsea/
+#### fgsea
+https://bioconductor.org/packages/fgsea
+https://stephenturner.github.io/deseq-to-fgsea/
+https://crazyhottommy.github.io/scRNA-seq-workshop-Fall-2019/scRNAseq_workshop_3.html
 
 #### gprofiler2 -- an R package for gene list functional enrichment analysis and namespace conversion toolset g:Profiler
 
