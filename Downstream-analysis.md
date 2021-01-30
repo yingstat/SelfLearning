@@ -21,3 +21,6 @@ https://www.gsea-msigdb.org/gsea/msigdb/collections.jsp
 
 https://f1000research.com/articles/9-709/v1
 https://t.co/QYsXUg6WoF
+
+#### A Critical Assessment of Storytelling: Gene Ontology Categories and the Importance of Validating Genomic Scans 
+https://doi.org/10.1093/molbev/mss136
