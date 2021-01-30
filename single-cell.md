@@ -1,5 +1,8 @@
 ## single cell
 
+#### Deatled codes and data in paper Benchmarking Computational Doublet-Detection Methods for Single-Cell RNA Sequencing Data
+https://arxiv.org/pdf/2101.08860.pdf
+
 #### TooManyCells identifies and visualizes relationships of single-cell clades
 https://www.nature.com/articles/s41592-020-0748-5
 https://github.com/faryabib/too-many-cells
