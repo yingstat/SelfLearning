@@ -1,5 +1,11 @@
 ## Quality Control
 
+#### FASTQuick: rapid and comprehensive quality assessment of raw sequence reads 
+https://github.com/Griffan/FASTQuick
+https://academic.oup.com/gigascience/article/10/2/giab004/6123620
+
+
+
 #### quality control tutorial
 https://training.galaxyproject.org/topics/sequence-analysis/tutorials/quality-control/tutorial.html
 
