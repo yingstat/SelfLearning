@@ -2,6 +2,8 @@
 
 #### Cell hashing 
 https://btep.ccr.cancer.gov/wp-content/uploads/cihan_cell_hashing_slides_oct10_fnl.pdf
+#### Rotating the knee (plot) and related yoga
+https://liorpachter.wordpress.com/2019/06/24/rotating-the-knee-plot-and-related-yoga/amp/?__twitter_impression=true
 
 #### Deatled codes and data in paper Benchmarking Computational Doublet-Detection Methods for Single-Cell RNA Sequencing Data
 https://arxiv.org/pdf/2101.08860.pdf
