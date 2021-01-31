@@ -1,5 +1,8 @@
 ## Visualization
 
+#### a ggplot2 tutorial for beautiful plotting
+https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/
+
 #### Extrapolating with B splines and GAMs
 https://fromthebottomoftheheap.net/2020/06/03/extrapolating-with-gams/
 
