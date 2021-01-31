@@ -1,4 +1,6 @@
 ## single cell
+#### tidyseurat provides a bridge between the Seurat single-cell package [@butler2018integrating; @stuart2019comprehensive] and the tidyverse 
+https://cran.r-project.org/web/packages/tidyseurat/vignettes/introduction.html
 
 #### Cell hashing 
 https://btep.ccr.cancer.gov/wp-content/uploads/cihan_cell_hashing_slides_oct10_fnl.pdf
