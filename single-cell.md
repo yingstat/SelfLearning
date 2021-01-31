@@ -1,5 +1,8 @@
 ## single cell
 
+#### Cell hashing 
+https://btep.ccr.cancer.gov/wp-content/uploads/cihan_cell_hashing_slides_oct10_fnl.pdf
+
 #### Deatled codes and data in paper Benchmarking Computational Doublet-Detection Methods for Single-Cell RNA Sequencing Data
 https://arxiv.org/pdf/2101.08860.pdf
 
