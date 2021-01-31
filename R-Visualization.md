@@ -1,7 +1,9 @@
 ## Visualization
 
-#### How to VisualiE and Handle Missing Data in R with simputation
+#### Extrapolating with B splines and GAMs
+https://fromthebottomoftheheap.net/2020/06/03/extrapolating-with-gams/
 
+#### How to VisualiE and Handle Missing Data in R with simputation
 https://www.business-science.io/code-tools/2021/01/19/handle-missing-data.html
 
 #### Visualise correlation results and test significancies of these
