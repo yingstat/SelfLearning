@@ -1,3 +1,7 @@
+#### Integrative differential expression and gene set enrichment analysis using summary statistics for scRNA-seq studies
+https://www.nature.com/articles/s41467-020-15298-6
+
+
 #### Pathway enrichment analysis and visualization of omics data using g:Profiler, GSEA, Cytoscape and EnrichmentMap
 https://www.nature.com/articles/s41596-018-0103-9
 
