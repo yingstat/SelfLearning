@@ -28,3 +28,9 @@ https://thenode.biologists.com/quantification-of-differences-as-alternative-for-
 https://www.nature.com/articles/s41592-019-0470-3
 #### Using dabestr: How to create estimation plots
 https://cran.r-project.org/web/packages/dabestr/vignettes/using-dabestr.html
+
+#### permutation test
+https://www.jwilber.me/permutationtest/
+
+#### Collinearity isn't a disease that needs curing
+https://janhove.github.io/analysis/2019/09/11/collinearity
