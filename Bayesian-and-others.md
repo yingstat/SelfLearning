@@ -18,14 +18,21 @@ https://emilyriederer.netlify.app/post/causal-design-patterns/
 #### Mixed Models with R - Getting started with random effects
 https://m-clark.github.io/mixed-models-with-R/
 
+#### Bayesian notes
+https://jrnold.github.io/bayesian_notes/
+
 #### Bayesian estimation and optimisation of expected FDR and expected FNR
 https://alanocallaghan.github.io/bayefdr/
+
 #### What does effect size tell you?
 https://www.simplypsychology.org/effect-size.html
+
 #### Make a difference: the alternative for p-values
 https://thenode.biologists.com/quantification-of-differences-as-alternative-for-p-values/research/
+
 #### Moving beyond P values: data analysis with estimation graphics
 https://www.nature.com/articles/s41592-019-0470-3
+
 #### Using dabestr: How to create estimation plots
 https://cran.r-project.org/web/packages/dabestr/vignettes/using-dabestr.html
 
