@@ -1,3 +1,6 @@
+#### fgsea
+http://bioconductor.org/packages/release/bioc/vignettes/fgsea/inst/doc/fgsea-tutorial.html
+
 #### Integrative differential expression and gene set enrichment analysis using summary statistics for scRNA-seq studies
 https://www.nature.com/articles/s41467-020-15298-6
 
