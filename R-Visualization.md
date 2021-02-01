@@ -10,6 +10,10 @@ https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html
 #### Extrapolating with B splines and GAMs
 https://fromthebottomoftheheap.net/2020/06/03/extrapolating-with-gams/
 
+#### R-package for fitting some of the most common GP models, called gplite
+https://jpiironen.github.io/material/gplite/quickstart.html
+
+
 #### How to VisualiE and Handle Missing Data in R with simputation
 https://www.business-science.io/code-tools/2021/01/19/handle-missing-data.html
 
