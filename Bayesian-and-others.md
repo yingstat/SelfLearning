@@ -12,6 +12,9 @@ https://bookdown.org/content/3686/
 #### Hierarchical generalized additive models in ecology: an introduction with mgcv
 https://peerj.com/articles/6876/?td=tw
 
+#### Causal design patterns for data analysts
+https://emilyriederer.netlify.app/post/causal-design-patterns/
+
 #### Mixed Models with R - Getting started with random effects
 https://m-clark.github.io/mixed-models-with-R/
 
