@@ -1,4 +1,8 @@
 ## R 
+
+#### A gentle introduction to data.table
+https://atrebas.github.io/post/2020-06-17-datatable-introduction/
+
 #### An important Twitter 
 
 https://twitter.com/statman_sean/status/1352652461522231303?s=21
