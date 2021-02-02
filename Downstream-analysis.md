@@ -2,10 +2,14 @@
 http://bioconductor.org/packages/release/bioc/vignettes/fgsea/inst/doc/fgsea-tutorial.html
 https://twitter.com/assaron/status/1356330809729425409?s=21
 
+#### Using MAST with RNASeq: MAIT Analysis.
+https://bioconductor.org/packages/devel/bioc/vignettes/MAST/inst/doc/MAITAnalysis.html
+
+#### Using SingleR to annotate single-cell RNA-seq data
+http://bioconductor.org/packages/release/bioc/vignettes/SingleR/inst/doc/SingleR.html
 
 #### Integrative differential expression and gene set enrichment analysis using summary statistics for scRNA-seq studies
 https://www.nature.com/articles/s41467-020-15298-6
-
 
 #### Pathway enrichment analysis and visualization of omics data using g:Profiler, GSEA, Cytoscape and EnrichmentMap
 https://www.nature.com/articles/s41596-018-0103-9
