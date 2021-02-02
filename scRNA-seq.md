@@ -1,9 +1,22 @@
 ## single cell
 
+#### Comparing Ensembl GTF and cDNA 
+https://fromsystosys.netlify.app/2020/01/31/comparing-ensembl-gtf-and-cdna/
+
 #### Near-optimal pre-processing of single-cell RNA-seq
 https://www.biorxiv.org/content/10.1101/673285v2
 
+#### kallisto-bustools
+https://bustools.github.io/BUS_notebooks_R/velocity.html
 https://liorpachter.wordpress.com/2019/06/21/near-optimal-single-cell-rna-seq-pre-processing/
+
+#### kallisto-bustools for scATAC-seq
+https://f1000research.com/articles/9-199/v1
+
+
+
+#### Benchmarking of lightweight-mapping based single-cell RNA-seq pre-processing
+https://github.com/pachterlab/BP_2021
 
 #### STARsolo: mapping, demultiplexing and quantification for single cell RNA-seq
 https://github.com/alexdobin/STAR/blob/master/docs/STARsolo.md
@@ -11,6 +24,13 @@ https://github.com/alexdobin/STAR/blob/master/docs/STARsolo.md
 #### Evaluation of STAR and Kallisto on Single Cell RNA-Seq Data Alignment
 https://twitter.com/GarmireGroup/status/1245018623783120896?s=20
 https://www.g3journal.org/content/10/5/1775
+
+#### compare kallisto-bustools and cellranger for single nuclei sequencing data
+https://divingintogeneticsandgenomics.rbind.io/post/compare-kallisto-bustools-and-cellranger-for-single-nuclei-seqencing-data/
+
+#### differences between gene counts when using STARsolo Gene and GeneFull options
+https://github.com/tzuni/starsolo_quant_analysis/blob/master/notebooks/star_solo_gene_genefull_plot.ipynb
+
 ##### Aligner Comparsion project code summary
 https://github.com/yhdu36/aligner
 
