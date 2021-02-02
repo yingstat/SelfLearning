@@ -1,5 +1,18 @@
 ## dimension reduction or clustering
 
+#### Using t-SNE for data analysis: A quick introduction 
+https://www.youtube.com/watch?v=bCkXxaoeFZ8
+https://bioturing.com/sources/webinar/5f619516e8514f514bde7996
+
+#### tSNE vs. UMAP: Global Structure
+https://towardsdatascience.com/tsne-vs-umap-global-structure-4d8045acba17
+
+#### Initialization is critical for preserving global data structure in both t-SNE and UMAP
+https://www.nature.com/articles/s41587-020-00809-z
+
+#### t-SNE default parameters and clarifying documentation
+https://github.com/scikit-learn/scikit-learn/issues/18018
+
 #### PCAtools
 
 https://bioconductor.org/packages/release/bioc/vignettes/PCAtools/inst/doc/PCAtools.html
