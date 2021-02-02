@@ -8,3 +8,6 @@ https://github.com/crazyhottommy/bioinformatics-one-liners
 
 #### git demo
 https://github.com/vsbuffalo/git-demo
+
+#### r-bioinfo-workshop
+https://github.com/vsbuffalo/r-bioinfo-workshop/tree/master/lecture-notebooks
