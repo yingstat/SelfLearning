@@ -3,6 +3,9 @@
 #### Analysis of single cell RNA-seq data
 https://biocellgen-public.svi.edu.au/mig_2019_scrnaseq-workshop/public/index.html
 
+#### Single cell RNA-seq analysis notes
+https://github.com/crazyhottommy/scRNAseq-analysis-notes
+
 #### Comparing Ensembl GTF and cDNA 
 https://fromsystosys.netlify.app/2020/01/31/comparing-ensembl-gtf-and-cdna/
 
