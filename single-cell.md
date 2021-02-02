@@ -1,4 +1,38 @@
 ## single cell
+
+#### Near-optimal pre-processing of single-cell RNA-seq
+https://www.biorxiv.org/content/10.1101/673285v2
+
+https://liorpachter.wordpress.com/2019/06/21/near-optimal-single-cell-rna-seq-pre-processing/
+
+#### STARsolo: mapping, demultiplexing and quantification for single cell RNA-seq
+https://github.com/alexdobin/STAR/blob/master/docs/STARsolo.md
+
+#### Evaluation of STAR and Kallisto on Single Cell RNA-Seq Data Alignment
+https://twitter.com/GarmireGroup/status/1245018623783120896?s=20
+https://www.g3journal.org/content/10/5/1775
+##### Aligner Comparsion project code summary
+https://github.com/yhdu36/aligner
+
+#### Preprocessing choices affect RNA velocity results for droplet scRNA-seq data
+https://github.com/csoneson/rna_velocity_quant
+
+#### Single-cell RNA-seq for dummies
+https://liorpachter.wordpress.com/2019/06/21/single-cell-rna-seq-for-dummies/
+
+#### How to solve an NP-complete problem in linear time
+https://liorpachter.wordpress.com/2019/06/21/how-to-solve-an-np-complete-problem-in-linear-time/
+
+#### Rotating the knee (plot) and related yoga
+https://liorpachter.wordpress.com/2019/06/24/rotating-the-knee-plot-and-related-yoga/
+
+#### High velocity RNA velocity
+https://liorpachter.wordpress.com/2019/07/01/high-velocity-rna-velocity/
+
+#### Is Python really faster than C++ ?
+https://liorpachter.wordpress.com/2019/10/09/is-python-really-faster-than-c/
+
+
 #### tidyseurat provides a bridge between the Seurat single-cell package [@butler2018integrating; @stuart2019comprehensive] and the tidyverse 
 https://cran.r-project.org/web/packages/tidyseurat/vignettes/introduction.html
 
