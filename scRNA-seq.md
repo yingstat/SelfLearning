@@ -1,5 +1,8 @@
 ## single cell
 
+#### Analysis of single cell RNA-seq data
+https://biocellgen-public.svi.edu.au/mig_2019_scrnaseq-workshop/public/index.html
+
 #### Comparing Ensembl GTF and cDNA 
 https://fromsystosys.netlify.app/2020/01/31/comparing-ensembl-gtf-and-cdna/
 
@@ -14,12 +17,14 @@ https://liorpachter.wordpress.com/2019/06/21/near-optimal-single-cell-rna-seq-pr
 https://f1000research.com/articles/9-199/v1
 
 
-
 #### Benchmarking of lightweight-mapping based single-cell RNA-seq pre-processing
 https://github.com/pachterlab/BP_2021
 
 #### STARsolo: mapping, demultiplexing and quantification for single cell RNA-seq
 https://github.com/alexdobin/STAR/blob/master/docs/STARsolo.md
+
+#### cellranger vs kallisto
+https://github.com/Sarah145/scRNA_pre_process
 
 #### Evaluation of STAR and Kallisto on Single Cell RNA-Seq Data Alignment
 https://twitter.com/GarmireGroup/status/1245018623783120896?s=20
