@@ -1,5 +1,8 @@
 ## single cell
 
+#### iSEE: Interactive SummarizedExperiment Explorer.
+https://bioconductor.org/packages/release/bioc/html/iSEE.html
+
 #### Analysis of single cell RNA-seq data
 https://biocellgen-public.svi.edu.au/mig_2019_scrnaseq-workshop/public/index.html
 
