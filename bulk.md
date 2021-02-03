@@ -8,3 +8,6 @@ http://www.trii.org/courses/
 
 #### Time series differential gene expression with kallisto and sleuth
 http://www.nxn.se/valent/timecourse-analysis-with-sleuth
+
+#### From reads to regions: a Bioconductor workflow to detect differential binding in ChIP-seq data
+https://f1000research.com/articles/4-1080/v2
