@@ -8,6 +8,9 @@ https://bioconductor.org/packages/devel/bioc/vignettes/MAST/inst/doc/MAITAnalysi
 #### Using SingleR to annotate single-cell RNA-seq data
 http://bioconductor.org/packages/release/bioc/vignettes/SingleR/inst/doc/SingleR.html
 
+#### Assigning cell types with SingleR
+http://bioconductor.org/books/release/SingleRBook/
+
 #### Integrative differential expression and gene set enrichment analysis using summary statistics for scRNA-seq studies
 https://www.nature.com/articles/s41467-020-15298-6
 
