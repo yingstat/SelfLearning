@@ -1,5 +1,8 @@
 ## single cell
 
+#### Orchestrating Single-Cell Analysis with Bioconductor
+http://bioconductor.org/books/release/OSCA/
+
 #### iSEE: Interactive SummarizedExperiment Explorer.
 https://bioconductor.org/packages/release/bioc/html/iSEE.html
 
