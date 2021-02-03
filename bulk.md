@@ -11,3 +11,6 @@ http://www.nxn.se/valent/timecourse-analysis-with-sleuth
 
 #### From reads to regions: a Bioconductor workflow to detect differential binding in ChIP-seq data
 https://f1000research.com/articles/4-1080/v2
+
+#### SuperFreq analyses and filters somatic SNVs and short indels, calls copy numbers and tracks clones over multiple samples from the same individual. It identifies the copy number alterations and point mutations in each clone, and highlights potentially causing mutations through variant annotation and COSMIC.
+https://github.com/ChristofferFlensburg/superFreq
