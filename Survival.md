@@ -2,13 +2,19 @@
 
 #### Standard regression functions in R enabled for parallel processing over large data-frames
 https://bioconductor.org/packages/release/data/experiment/vignettes/RegParallel/inst/doc/RegParallel.html
+
 https://cran.r-project.org/web/packages/survival/
+
 https://cran.r-project.org/web/views/Survival.html
+
 https://rviews.rstudio.com/2017/09/25/survival-analysis-with-r/
 
 https://drive.google.com/file/d/1XbUBMegGNMcwWg5yy7Ec9wDk7P6ivaLF/view
+
 https://rpubs.com/FJRubio/GHGH
+
 https://rpubs.com/FJRubio/PSM
+
 https://rpubs.com/FJRubio/PSRM
 
 http://www.columbia.edu/~cjd11/charles_dimaggio/DIRE/resources/R/packages.pdf
@@ -23,6 +29,7 @@ https://www.r-bloggers.com/2019/09/ucscxenatools-retrieve-gene-expression-and-cl
 
 #### Bayesian Survival Analysis Using the rstanarm R Package
 https://arxiv.org/abs/2002.09633
+
 https://rpubs.com/kaz_yos/rstanarm_survival1
 
 #### Survival Analysis in R
@@ -37,6 +44,7 @@ https://www.mainard.co.uk/post/survival/
 
 #### https://pclambert.net/software/standsurv/
 Standardized cumulative incidence functions
+
 https://pclambert.net/software/standsurv/standardized_cif/
 
 #### Survival Analysis – Fitting Weibull Models for Improving Device Reliability in R
