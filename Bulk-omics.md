@@ -1,4 +1,8 @@
-## bulk multi-omics data analysis
+## bulk omics data analysis
+
+#### CyVerse Learning Center tutorials
+https://learning.cyverse.org/en/latest/tutorials.html
+
 #### Introduction to differential gene expression analysis using RNA-seq
 https://zenodo.org/record/3985047
 #### courses for Analysis of Next-Generation Sequence Data
@@ -14,3 +18,12 @@ https://f1000research.com/articles/4-1080/v2
 
 #### SuperFreq analyses and filters somatic SNVs and short indels, calls copy numbers and tracks clones over multiple samples from the same individual. It identifies the copy number alterations and point mutations in each clone, and highlights potentially causing mutations through variant annotation and COSMIC.
 https://github.com/ChristofferFlensburg/superFreq
+
+
+#### RNA-Seq data analysis
+https://ycl6.gitbook.io/guide-to-rna-seq-analysis/
+
+https://ycl6.gitbook.io/rna-seq-data-analysis/
+
+#### ChIP-Seq for dummies
+https://www.biostars.org/p/272802/
