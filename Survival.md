@@ -52,3 +52,8 @@ https://www.r-bloggers.com/2020/01/survival-analysis-fitting-weibull-models-for-
 
 #### Bootstrapping and plotting 95% confidence bands: 'Causal Inference: What If' Causal Survival Analysis
 https://www.elenadudukina.com/post/hernan-chapter-17-viz-and-bootstrap/2021-01-18-what-if-chapter-17-viz-and-bootstrap/
+
+#### mlr3proba: An R Package for Machine Learning in Survival Analysis 
+https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab039/6125361
+https://mlr3book.mlr-org.com/survival.html
+
