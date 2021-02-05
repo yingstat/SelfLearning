@@ -27,6 +27,9 @@ https://andrewdhawan.wordpress.com/
 #### Indrajeet Patil
 https://sites.google.com/site/indrajeetspatilmorality/r-packages
 
+#### Yihui Xie
+https://yihui.org/
+
 #### Lijia Yu
 https://yulijia.net/slides/
 
