@@ -1,5 +1,8 @@
 ## single cell
 
+#### Unlocking RNA-seq tools for zero inflation andsingle cell applications using observation weights
+https://statomics.github.io/SGA2019/assets/scRNA-seq.pdf
+
 #### Orchestrating Single-Cell Analysis with Bioconductor
 http://bioconductor.org/books/release/OSCA/
 
