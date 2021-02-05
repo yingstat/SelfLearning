@@ -48,6 +48,9 @@ https://cran.r-project.org/web/packages/gggenes/vignettes/introduction-to-gggene
 #### A simple tutorial for a complex ComplexHeatmap
 https://github.com/kevinblighe/E-MTAB-6141
 
+#### A customed package
+https://github.com/zktuong/kelvinny
+
 
 #### heatmaply
 https://alanocallaghan.github.io/heatmaplyExamples/
