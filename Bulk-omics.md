@@ -27,3 +27,6 @@ https://ycl6.gitbook.io/rna-seq-data-analysis/
 
 #### ChIP-Seq for dummies
 https://www.biostars.org/p/272802/
+
+#### Imputation Benchmarking: A Comprehensive Evaluation of SNP Genotype Imputation
+https://www.ikmb.uni-kiel.de/resources/download-tools/software/imputation-benchmarking
